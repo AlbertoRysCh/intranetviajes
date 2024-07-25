@@ -55,8 +55,8 @@ Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('fich
 Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');
 
 
-Route::get('/ficha-nutritional', [Sheet_NutritionalController::class, 'show'])->name('nutritional-sheet.show');
-Route::post('/ficha-nutritional', [Sheet_NutritionalController::class, 'store'])->name('nutritional-sheet.store');
+Route::get('/ficha-nutricional', [Sheet_NutritionalController::class, 'show'])->name('nutritional-sheet.show');
+Route::post('/ficha-nutricional', [Sheet_NutritionalController::class, 'store'])->name('nutritional-sheet.store');
 
 Route::get('/tu-viaje', function () {
     return view('users.tu-viaje');

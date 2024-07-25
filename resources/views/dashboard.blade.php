@@ -21,11 +21,11 @@
       }
   </style>
 
-  <div class="pt-12">
+  <div class="m-6 text-center sm:pt-12 sm:text-left">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="bg-red-rv dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+          <div class="bg-red-rv dark:bg-gray-800 overflow-hidden rounded-2xl shadow-sm sm:rounded-lg">
               <div class="flex flex-col md:flex-row justify-between items-center">
-                  <div class="p-6 text-white-rv dark:text-gray-100 text-lg pl-16">
+                  <div class="p-8 text-white-rv dark:text-gray-100 text-lg sm:pl-16 sm:p-6">
                       <div class="text-white-rv text-3xl">
                           {!! __('¡Bienvenido a <i>Viajes Roxana</i>,') !!} <b>{{ Auth::user()->name }}</b>!<br></div>
 
@@ -44,9 +44,9 @@
       </div>
   </div>
 
-  <div class="pt-12">
+  <div class="m-6 sm:pt-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4">
+          <div class="grid grid-cols-2 gap-x-2 gap-y-2 sm:gap-x-8 sm:grid-cols-4">
               <div>
                   <button data-target="miperfilSection"
                       class="w-full rounded-md border-1 border-t-2 border-red-rv bg-white text-black
@@ -101,9 +101,9 @@
 
   <!---    MI-PERFIL  --->
 
-  <div class="py-10 section active" id="miperfilSection">
+  <div class="p-6 pt-0 sm:py-10 section active" id="miperfilSection">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
+          <div class="grid grid-cols-1 px-6 sm:px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
               <div class="bg-white-rv border-red-rv border-2 rounded-lg flex-col flex p-4 items-center">
                   <div>
                       <h1 class="text-red-rv text-2xl font-bold">MIS DATOS</h1>
@@ -155,9 +155,9 @@
 
   <!---    MI-VIAJE  --->
 
-  <div class="py-10 section" id="miviajeSection">
+  <div class="p-6 pt-0 text-center  sm:text-left sm:py-10 section" id="miviajeSection">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
+          <div class="grid grid-cols-1 px-6 sm:px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
               <div class="bg-white-rv border-red-rv border-2 rounded-lg flex-col flex p-4 items-center">
                   <div>
                       <h1 class="text-red-rv text-2xl font-bold">VIAJE A PUNTA CANA</h1>
@@ -177,9 +177,9 @@
 
   <!---    MIS-PAGOS  --->
 
-  <div class="py-10 section" id="mipagoSection">
+  <div class="p-6 pt-0 sm:py-10 section" id="mipagoSection">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
+          <div class="grid grid-cols-1 px-6 sm:px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
               <div class="bg-white-rv border-red-rv border-2 rounded-lg flex-col flex p-4 items-center">
                   <div>
                       <h1 class="text-red-rv text-2xl font-bold">CRONOGRAMA</h1>
@@ -231,9 +231,9 @@
 
   <!---    CONTACTO    --->
 
-  <div class="py-10 section" id="contactoSection">
+  <div class="p-6 pt-0 sm:py-10 section" id="contactoSection">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="grid grid-cols-1 px-8 gap-6 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
+          <div class="grid grid-cols-1 px-6 sm:px-12 gap-6 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
               <div class="bg-white-rv border-red-rv border-2 rounded-lg flex-col flex items-center overflow-hidden">
                   <div class='flex flex-row justify-between flex-grow'>
                       <div>

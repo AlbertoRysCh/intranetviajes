@@ -12,14 +12,14 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 'bdark-rv': '#1C2434',
                 'white-rv': '#f8fafc',
-                'red-rv' :  '#CC2A41',
-                'wsp-rv' :  '#25d366',
-                'marfil-rv' : '#F5F5F5'
+                'red-rv': '#CC2A41',
+                'wsp-rv': '#25d366',
+                'marfil-rv': '#F5F5F5'
             },
             fontWeight: {
                 extraLight: 100,
@@ -33,9 +33,9 @@ module.exports = {
             },
             maxWidth: {
                 'custom-rv': '76rem', // Agrega un nuevo valor de max-width
-              },
+            },
         },
-        
+
     },
 
     plugins: [
