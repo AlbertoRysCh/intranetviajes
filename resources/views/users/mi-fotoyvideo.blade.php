@@ -70,7 +70,7 @@
                 <div class="grid grid-cols-1 gap-4">
                     <div>
                         <div class="mt-2.5 border-dashed border-2 border-black py-10 flex justify-center">
-                            <a href="#" class="flex flex-col content-center items-center">
+                            <a class="flex flex-col content-center items-center">
                                 <img src="/images/FotosyVideos02.png" alt="" width="150px">
                                 Descargar Fotos del Viaje
                             </a>
@@ -92,8 +92,8 @@
                     text-center text-sm font-semibold text-white shadow-sm 
                     hover:bg-red-rv focus-visible:outline 
                     focus-visible:outline-2 focus-visible:outline-offset-2
-                     focus-visible:outline--red-rv">
-                        GUARDAR CAMBIOS
+                     focus-visible:outline--red-rv" disabled>
+                        DESCARGAR FOTOS Y VIDEOS
                     </button>
                 </div>
                 <div class="text-end">

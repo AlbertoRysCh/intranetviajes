@@ -2,7 +2,8 @@
 
     <div class="m-6 text-center sm:pt-12 sm:text-left">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-red-rv dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 pb-0 gap-4">
+            <div
+                class="bg-red-rv dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 pb-0 gap-4">
                 <div class="flex flex-col md:flex-row justify-between items-center col-span-2">
                     <div class="p-5 text-white-rv dark:text-gray-100 text-lg sm:pl-16">
                         <div class="text-white-rv text-3xl">
@@ -37,36 +38,42 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class=" max-sm:col-span-2">
                         <p class="text-center  text-red-rv mb-4 text-2xl font-bold">Indicaciones</p>
-                        <div class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
-                            <img
-                                src="/images/Icons_Vaucher.png" width="150px">
+                        <div
+                            class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
+                            <a>
+                                <img src="/images/Icons_Vaucher.png" width="150px">
                                 Descarga tu archivo
+                            </a>
                         </div>
-                        <button type="submit"
+                        <a type="submit"
                             class="block w-40 mt-6 items-center rounded-md bg-red-rv px-3.5 py-2.5 
                             text-center text-sm font-semibold text-white shadow-sm 
                             hover:bg-red-rv focus-visible:outline 
                             focus-visible:outline-2 focus-visible:outline-offset-2
                              focus-visible:outline--red-rv mx-auto">
                             DESCARGAR
-                        </button>
+                        </a>
                     </div>
 
                     <div class=" max-sm:col-span-2">
                         <p class="text-center  text-red-rv mb-4 text-2xl font-bold">Recomendaciones</p>
-                        <div class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
-                            <img
-                                src="/images/Icons_Recomendaciones.png" width="150px">
+                        <div
+                            class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
+                            <a href="" href="/pdfs/recomendaciones-puntacana.pdf" target="_blank">
+                                <img src="/images/Icons_Recomendaciones.png" width="150px">
                                 Descarga tu archivo
+                            </a>
+
                         </div>
-                        <button type="submit"
+                        <div></div>
+                        <a href="/pdfs/recomendaciones-puntacana.pdf" target="_blank"
                             class="block w-40 mt-6 items-center rounded-md bg-red-rv px-3.5 py-2.5 
                             text-center text-sm font-semibold text-white shadow-sm 
                             hover:bg-red-rv focus-visible:outline 
                             focus-visible:outline-2 focus-visible:outline-offset-2
                              focus-visible:outline--red-rv mx-auto">
                             DESCARGAR
-                        </button>
+                        </a>
                     </div>
 
                     <hr>
@@ -74,36 +81,40 @@
 
                     <div class=" max-sm:col-span-2">
                         <p class="text-center  text-red-rv mb-4 text-2xl font-bold">¿Que ropa llevar a mi viaje?</p>
-                        <div class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
-                            <img
-                                src="/images/playa.png" width="150px">
+                        <div
+                            class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
+                            <a href="/pdfs/ropa-puntacana.pdf" target="_blank">
+                                <img src="/images/playa.png" width="150px">
                                 Descarga tu archivo
+                            </a>
                         </div>
-                        <button type="submit"
+                        <a href="/pdfs/ropa-puntacana.pdf" target="_blank"
                             class="block w-40 mt-6 items-center rounded-md bg-red-rv px-3.5 py-2.5 
                             text-center text-sm font-semibold text-white shadow-sm 
                             hover:bg-red-rv focus-visible:outline 
                             focus-visible:outline-2 focus-visible:outline-offset-2
                              focus-visible:outline--red-rv mx-auto">
                             DESCARGAR
-                        </button>
+                        </a>
                     </div>
 
                     <div class=" max-sm:col-span-2">
                         <p class="text-center  text-red-rv mb-4 text-2xl font-bold">Permiso Notarial</p>
-                        <div class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
-                            <img
-                                src="/images/Icons_PermisoNotarial.png" width="150px">
+                        <div
+                            class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
+                            <a href="/pdfs/permiso-notarial-puntacana.pdf" target="_blank">
+                                <img src="/images/Icons_PermisoNotarial.png" width="150px">
                                 Descarga tu archivo
+                            </a>
                         </div>
-                        <button type="submit"
+                        <a href="/pdfs/permiso-notarial-puntacana.pdf" target="_blank"
                             class="block w-40 mt-6 items-center rounded-md bg-red-rv px-3.5 py-2.5 
                             text-center text-sm font-semibold text-white shadow-sm 
                             hover:bg-red-rv focus-visible:outline 
                             focus-visible:outline-2 focus-visible:outline-offset-2
                              focus-visible:outline--red-rv mx-auto">
                             DESCARGAR
-                        </button>
+                        </a>
                     </div>
 
                     <hr>
@@ -114,11 +125,11 @@
                     </x-texthead>
 
                     <div class=" max-sm:col-span-2">
-                        <div class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
-                            <img
-                                src="/images/Icons_Vaucher.png" width="180px">
-                                Voucher Medico<br>
-                                 
+                        <div
+                            class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
+                            <img src="/images/Icons_Vaucher.png" width="180px">
+                            Voucher Medico<br>
+
                         </div>
                         <button type="submit"
                             class="block w-40 mt-6 items-center rounded-md bg-red-rv px-3.5 py-2.5 
@@ -131,19 +142,22 @@
                     </div>
 
                     <div class=" max-sm:col-span-2">
-                        <div class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
-                            <img
-                                src="/images/Icons_Clinicas.png" width="180px">
+                        <div
+                            class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
+                            <a href="pdfs/clinicas-cercanas-puntacana.pdf" target="_blank">
+                                <img src="/images/Icons_Clinicas.png" width="180px">
                                 Lista de Clinicas Cercanas
+                            </a>
+
                         </div>
-                        <button type="submit"
+                        <a href="pdfs/clinicas-cercanas-puntacana.pdf" target="_blank"
                             class="block w-40 mt-6 items-center rounded-md bg-red-rv px-3.5 py-2.5 
                             text-center text-sm font-semibold text-white shadow-sm 
                             hover:bg-red-rv focus-visible:outline 
                             focus-visible:outline-2 focus-visible:outline-offset-2
                              focus-visible:outline--red-rv mx-auto">
                             DESCARGAR
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

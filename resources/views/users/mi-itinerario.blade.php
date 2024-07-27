@@ -2,7 +2,8 @@
 
     <div class="m-6 text-center sm:pt-12 sm:text-left">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-red-rv dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 pb-0 gap-4">
+            <div
+                class="bg-red-rv dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 pb-0 gap-4">
                 <div class="flex flex-col md:flex-row justify-between items-center col-span-2">
                     <div class="p-5 text-white-rv dark:text-gray-100 text-lg sm:pl-16">
                         <div class="text-white-rv text-3xl">
@@ -39,7 +40,7 @@
                     <div class="grid grid-cols-1 gap-4">
                         <div>
                             <div class="mt-2.5 border-dashed border-2 border-black py-10 flex justify-center">
-                                <a href="#" class="flex flex-col content-center items-center">
+                                <a href="/pdfs/itinerario-puntacana.pdf" target="_blank" class="flex flex-col content-center items-center">
                                     <img src="/images/Icons_ItinerarioPDF.png" alt="" width="150px">
                                     Descargar Itinerario Actualizado
                                 </a>
@@ -55,14 +56,14 @@
                         <a href="{{ URL::previous() }}">Volver</a>
                     </div>
                     <div>
-                        <button type="submit"
+                        <a href="/pdfs/itinerario-puntacana.pdf" target="_blank"
                             class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
                         text-center text-sm font-semibold text-white shadow-sm 
                         hover:bg-red-rv focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv">
-                            GUARDAR CAMBIOS
-                        </button>
+                         focus-visible:outline--red-rv p">
+                            DESCARGAR
+                        </a>
                     </div>
                     <div class="text-end">
                         <a href="/mi-fotoyvideo">Siguiente</a>
@@ -73,14 +74,14 @@
                 <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 sm:hidden">
 
                     <div class="col-span-2">
-                        <button type="submit"
+                        <a href="/pdfs/itinerario-puntacana.pdf" target="_blank"
                             class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
                         text-center text-sm font-semibold text-white shadow-sm 
                         hover:bg-red-rv focus-visible:outline 
                         focus-visible:outline-2 focus-visible:outline-offset-2
                          focus-visible:outline--red-rv ">
-                            GUARDAR CAMBIOS
-                        </button>
+                            DESCARGAR
+                    </a>
                     </div>
                     <div class="text-start">
                         <a href="{{ URL::previous() }}">Volver</a>
