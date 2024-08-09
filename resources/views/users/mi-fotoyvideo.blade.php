@@ -87,7 +87,7 @@
                     <a href="{{ URL::previous() }}">Volver</a>
                 </div>
                 <div>
-                    <button type="submit"
+                    <button
                         class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
                     text-center text-sm font-semibold text-white shadow-sm 
                     hover:bg-red-rv focus-visible:outline 
@@ -105,13 +105,13 @@
             <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 sm:hidden">
 
                 <div class="col-span-2">
-                    <button type="submit"
+                    <button
                         class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
                     text-center text-sm font-semibold text-white shadow-sm 
                     hover:bg-red-rv focus-visible:outline 
                     focus-visible:outline-2 focus-visible:outline-offset-2
                      focus-visible:outline--red-rv ">
-                        GUARDAR CAMBIOS
+                        DESCARGAR FOTOS Y VIDEOS
                     </button>
                 </div>
                 <div class="text-start">

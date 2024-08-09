@@ -115,10 +115,18 @@ class UserController extends Controller
         //dd($user);
         $user->save();
 
-        return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
+        //return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
+        //return redirect()->back()->with('success', 'Los datos se han cambiado correctamente.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Los datos se han cambiado correctamente.'
+        ]);
     }
+    
     public function updateFoto(Request $request)
     {
+	try {
+
         $user = Auth::user();
 
         $request->validate([
@@ -128,10 +136,7 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             // Eliminar la imagen antigua si existe
             $image = Image::make($request->file('avatar'));
-
-            if ($image->width() !== 512 || $image->height() !== 512) {
-                return redirect()->back()->withErrors(['avatar' => 'La imagen debe tener un tamaño de 512x512 píxeles.']);
-            }
+            
             if ($user->foto) {
                 Storage::delete('public/' . $user->foto);
             }
@@ -143,7 +148,10 @@ class UserController extends Controller
         }
 
         return response()->json(['success' => true, 'avatar_url' => asset('storage/' . $user->foto)]);
+    }catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()]);
     }
+}
     /**
      * Remove the specified resource from storage.
      *

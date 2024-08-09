@@ -1,28 +1,47 @@
 <x-approxana-layout>
-    <div class="m-6 text-center sm:pt-12 sm:text-left">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-red-rv dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 gap-4">
-                <div class="flex flex-col md:flex-row justify-between items-center sm:col-span-2">
-                    <div class="p-5 text-white-rv dark:text-gray-100 text-lg sm:pl-16">
-                        <div class="text-white-rv text-3xl">
-                            {!! __('¡Hola ,') !!} <b>{{ explode(' ', Auth::user()->name)[0] }}
-                                {{ explode(' ', Auth::user()->apellidos)[0] }}</b>!<br>
-                        </div>
-
-                        <p class="mt-4 text-white-rv-400 text-base font-Light">
-                            {!! __(
-                                'Para asegurar que tus preferencias y restricciones alimentarias se tengan en cuenta durante tu viaje, por favor completa los siguientes campos con la información requerida.',
-                            ) !!}
-                        </p>
-                    </div>
-                </div>
-                <div class="p-0 text-white-rv dark:text-gray-100 pr-16 pt-5">
-                    <img src="/images/health.png" alt="" class="pb-0 w-64">
-                </div>
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex flex-row justify-between">
+            <div>
+                <a href="{{ route('mi-perfil') }}"
+                    class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                    </svg>
+                    <p>Ir a mi Perfil</p>
+                </a>
+            </div>
+            <div class="flex flex-row gap-6">
+                <a href="{{ route('users.mis-datos') }}"
+                    class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                    <p>Mis Datos</p>
+                </a>
+                <a href="{{ route('ficha-medica.show') }}"
+                    class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                    <p>Ficha Médica</p>
+                </a>
             </div>
         </div>
     </div>
 
+
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto mt-10 sm:px-6 lg:px-8">
+            <div class="flex flex-row text-center gap-6 mb-8 items-center">
+                <h3 class=" font-normal text-5xl">Ficha Nutricional</h3>
+                <div class="w-80 bg-gray-300 rounded-md ">
+                    <p class="text-center bg-green-400 border border-green-400 rounded-md w-72 ">95% completado</p>
+                </div>
+            </div>
+            <div class="flex flex-row items-center">
+                <img src="/images/health.png" alt="">
+                <p>Para asegurar que tus preferencias y restricciones alimentaria<br> 
+                    se tengan en cuenta durante tu viaje, por favor completa los <br>
+                     siguientes campos con la información requerida.</p>
+            </div>
+        </div>
+    </div>
 
     <!--- div formulario --->
 
@@ -31,11 +50,14 @@
             <form action="{{ route('nutritional-sheet.store') }}" method="POST">
                 @csrf
                 <!-- MIS DATOS PERSONALES -->
-                <x-texthead>
-                    {{ __('Mi Ficha Nutricional') }}
-                </x-texthead>
-                <div class="grid grid-cols-1 gap-4 p-6  bg-white border border-gray-200 rounded-lg shadow">
+
+                <div class="grid grid-cols-1 gap-4 p-6 my-8  bg-white border border-gray-200 rounded-lg shadow">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="col-span-3">
+                            <x-texthead>
+                                {{ __('Mi Ficha Nutricional') }}
+                            </x-texthead>
+                        </div>
                         <div>
                             <label for="peso"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Peso</label>
@@ -169,8 +191,8 @@
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
                             <div class="mt-2.5">
-                                <input type="text" name="edalergiasAlimentarias" id="edalergiasAlimentarias" disabled
-                                    placeholder="Ejemplo: Dificutad para respirar por ingesta de mariscos."
+                                <input type="text" name="edalergiasAlimentarias" id="edalergiasAlimentarias"
+                                    disabled placeholder="Ejemplo: Dificutad para respirar por ingesta de mariscos."
                                     value="{{ isset($nutritionalSheet) ? $nutritionalSheet->detalles_alergias : '' }}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 bg-white
                                     text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -365,44 +387,34 @@
                 </div>
 
                 <!-- BOTONES GUARDAR -->
-
-                <div class="my-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 max-sm:hidden">
-                    <div class="text-start">
-                        <a href="{{ URL::previous() }}">Volver</a>
+                <div class="flex  flex-row justify-between pb-8">
+                    <div>
+                        <a href="{{ route('mi-perfil') }}"
+                            class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-5 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                            </svg>
+                            <p>Ir a mi Perfil</p>
+                        </a>
+                    </div>
+                    <div id="success-message"
+                        class="flex items-center text-green-600 hidden
+                         bg-green-100 border border-green-600 rounded p-2 mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span id="success-text"></span>
                     </div>
                     <div>
                         <button type="submit"
-                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
-                        text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-red-rv focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv">
+                            class="block w-full rounded-full bg-red-rv px-16 py-5
+                                text-center text-sm font-semibold text-white shadow-sm
+                                hover:bg-red-rv">
                             GUARDAR CAMBIOS
                         </button>
-                    </div>
-                    <div class="text-end">
-                        <a href="/dashboard">Inicio</a>
-                    </div>
-                </div>
-
-                <!-- BOTONES GUARDAR PHONE -->
-                <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 sm:hidden">
-
-                    <div class="col-span-2">
-                        <button type="submit"
-                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
-                        text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-red-rv focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv ">
-                            GUARDAR CAMBIOS
-                        </button>
-                    </div>
-                    <div class="text-start">
-                        <a href="{{ URL::previous() }}">Volver</a>
-                    </div>
-                    <div class="text-end">
-                        <a href="/dashboard">Inicio</a>
                     </div>
                 </div>
             </form>

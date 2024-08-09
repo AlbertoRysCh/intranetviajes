@@ -17,7 +17,7 @@ module.exports = {
             colors: {
                 'bdark-rv': '#1C2434',
                 'white-rv': '#f8fafc',
-                'red-rv': '#CC2A41',
+                'red-rv': '#d52e27',
                 'wsp-rv': '#25d366',
                 'marfil-rv': '#F5F5F5'
             },

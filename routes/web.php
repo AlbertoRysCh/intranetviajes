@@ -62,6 +62,10 @@ Route::get('/tu-viaje', function () {
     return view('users.tu-viaje');
 })->middleware(['auth', 'verified'])->name('tu-viaje');
 
+Route::get('/viajes', function () {
+    return view('users.viajes');
+})->middleware(['auth', 'verified'])->name('viajes');
+
 Route::get('/mi-itinerario', function () {
     return view('users.mi-itinerario');
 })->middleware(['auth', 'verified'])->name('mi-itinerario');
@@ -81,9 +85,16 @@ Route::get('/mi-checkin', function () {
 Route::get('/mi-cronograma', function () {
     return view('users.mi-cronograma');
 })->middleware(['auth', 'verified'])->name('mi-cronograma');
+
 Route::get('/principal', function () {
     return view('users.principal');
 })->middleware(['auth', 'verified'])->name('principal');
+
+Route::get('/mi-perfil', function () {
+    return view('users.mi-perfil');
+})->middleware(['auth', 'verified'])->name('mi-perfil');
+
+
 
 require __DIR__.'/auth.php';
 

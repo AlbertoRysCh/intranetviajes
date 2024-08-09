@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Viajes Roxana - Intranet</title>
+        <link rel="icon" href="{{ asset('roxana.ico') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -22,7 +23,7 @@
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-marfil-rv dark:bg-gray-800 shadow-xl shadow-inner overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-marfil-rv dark:bg-gray-800 shadow-xl overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>

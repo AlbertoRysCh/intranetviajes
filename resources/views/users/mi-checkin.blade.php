@@ -106,7 +106,7 @@
                         <div
                             class="rounded-lg border-2 border-dashed border-black py-8 flex flex-col justify-center items-center">
                             <img src="/images/identifiacion-vr.png" width="120px">
-                            Descarga tu archivo
+                            Sube tu archivo
                         </div>
                     </div>
 

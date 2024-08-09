@@ -1,1 +1,1 @@
-<img src="/images/icono-rv.png" alt="" class="w-full max-w-40">
+<img src="/images/viajesroxana-logo-2024-white.png" alt="" class="w-full max-w-40">
