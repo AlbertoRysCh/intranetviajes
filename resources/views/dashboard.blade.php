@@ -1,3 +1,7 @@
+@php
+use Carbon\Carbon;
+Carbon::setLocale('es');
+@endphp
 <x-approxana-layout>
 
     <style>
@@ -155,25 +159,36 @@
   
     <!---    MI-VIAJE  --->
   
-    <div class="p-6 pt-0 text-center  sm:text-left sm:py-10 section" id="miviajeSection">
+
+
+    <div class="p-6 pt-0 text-center sm:text-left sm:py-10 section" id="miviajeSection">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 px-6 sm:px-12 gap-16 sm:grid-cols-3 bg-white py-8 rounded-s items-stretch">
-                <div class="bg-white-rv border-red-rv border-2 rounded-lg flex-col flex p-4 items-center">
-                    <div>
-                        <h1 class="text-red-rv text-2xl font-bold">VIAJE A PUNTA CANA</h1>
+                @foreach($groups as $group)
+                    <div class="bg-white-rv border-red-rv border-2 rounded-lg flex-col flex p-4 items-center">
+                        <div>
+                            <h1 class="text-red-rv text-2xl font-bold">{{ $group->travel->nombre_viaje }}</h1>
+                            <h1 class="text-red-rv text-xl font-bold">Grupo: {{ $group->nombre_grupo }}</h1>
+                            <h1 class="text-red-rv text-2xl font-light"> Fecha de viaje: {{ Carbon::parse($group->travel->fecha_viaje)->translatedFormat('d \\d\\e F Y') }}</h1>
+                        </div>
+                        <div>
+                            @if($group->travel->travel_image)
+                                <img src="{{ asset('images/' . $group->travel->travel_image) }}" alt="Imagen de {{ $group->travel->nombre_viaje }}" class="w-full h-auto rounded-lg mt-4">
+                            @endif
+                        </div>
+                        <div>
+                            <a href="{{ route('tu-viaje', ['groupId' => $group->groupID]) }}">
+                                <x-roxana-button>
+                                    {{ __('VER MÁS') }}
+                                </x-roxana-button>
+                            </a>
+                        </div>
                     </div>
-                    <div>
-                        <a href="{{ route('tu-viaje') }}">
-                            <x-roxana-button>
-                                {{ __('VER MÁS') }}
-                            </x-roxana-button>
-                        </a>
-                    </div>
-                </div>
-                
+                @endforeach
             </div>
         </div>
     </div>
+    
   
     <!---    MIS-PAGOS  --->
   

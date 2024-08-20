@@ -50,9 +50,13 @@ class UserController extends Controller
     public function show()
     {
         $user = Auth::user();
+        $group = $user->group;
+        $groupName = $group ? $group->nombre_grupo : 'Sin grupo'; // Si no tiene grupo, mostrar "Sin grupo"
+        $nombreEncargado = $group ? $group->nombre_encargado : 'No asignado';
+        $telefonoEncargado = $group ? $group->telefono_encargado : 'No asignado';
         $json = File::get(public_path('countries.json'));
         $countries = json_decode($json)->countries;
-        return view('users.mis-datos', compact('user','countries'));
+        return view('users.mis-datos', compact('user','countries', 'groupName', 'nombreEncargado', 'telefonoEncargado'));
     }
 
     /**
@@ -81,22 +85,25 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-     
-        /*$validated = $request->validate([
-            'first-name' => 'required|string|max:255',
-            'last-name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'telefono' => 'nullable|string|max:15',
-            // Agrega otras validaciones según sea necesario
-        ]);*/
-        
+        /*$user->apellidos = $request->input('apellidos');*/
         $user->sexo = $request->input('genero');
         $user->tip_documento = $request->input('tipo_documento');
         $user->documento = $request->input('documento');
-        $nacimiento = Carbon::createFromFormat('m/d/Y', $request->input('nacimiento'))->format('Y-m-d');
-        $user->nacimiento = $nacimiento;
+        /*$nacimiento = Carbon::createFromFormat('m/d/Y', $request->input('nacimiento'))->format('Y-m-d');
+        $user->nacimiento = $nacimiento;*/
+           // Verificar el formato de la fecha de nacimiento
+    $nacimientoInput = $request->input('nacimiento');
+    if ($nacimientoInput && \DateTime::createFromFormat('d/m/Y', $nacimientoInput) !== false) {
+        $nacimiento = Carbon::createFromFormat('d/m/Y', $nacimientoInput)->format('Y-m-d');
+    } else {
+        // Si no se proporciona una fecha válida, usar la fecha actual
+        $nacimiento = Carbon::now()->format('Y-m-d');
+    }
+    $user->nacimiento = $nacimiento;
+
         $user->edad = $request->input('edad');
         $user->direccion = $request->input('direccion');
+        $user->telefono = $request->input('celular');
         $user->pais_origen = $request->input('p_origen');
         $user->nombre_emer = $request->input('nombre_emer');
         $user->apellido_emer = $request->input('apellido_emer');
@@ -111,8 +118,6 @@ class UserController extends Controller
         $user->espe_detalles_c = $request->input('esp_detalles_c');
         $user->informacion_ad = $request->input('informacion_ad');
         $user->noti_email = $request->input('email_r');
-        // Agrega otros campos según sea necesario
-        //dd($user);
         $user->save();
 
         return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
@@ -129,7 +134,7 @@ class UserController extends Controller
             // Eliminar la imagen antigua si existe
             $image = Image::make($request->file('avatar'));
 
-            if ($image->width() !== 512 || $image->height() !== 512) {
+            if ($image->width() == 512 || $image->height() == 512) {
                 return redirect()->back()->withErrors(['avatar' => 'La imagen debe tener un tamaño de 512x512 píxeles.']);
             }
             if ($user->foto) {

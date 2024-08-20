@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AccountDeletedMail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,6 +49,8 @@ class ProfileController extends Controller
         ]);
 
         $user = $request->user();
+
+        Mail::to($user->email)->send(new AccountDeletedMail($user));
 
         Auth::logout();
 

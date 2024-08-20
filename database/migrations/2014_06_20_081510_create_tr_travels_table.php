@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('travelID');
             $table->unsignedBigInteger('packageID');
             $table->string('nombre_viaje');
+            $table->string('travel_image')->nullable();
             $table->string('codigo_viaje');
             $table->string('destino');
             $table->float('costo_total');
@@ -26,6 +27,14 @@ return new class extends Migration
             $table->string('plan_alojamiento');
             $table->string('nom_hotel');
             $table->text('itinerario');
+            $table->text('link_insta')->nullable();
+            $table->text('link_videoyt')->nullable();
+            $table->text('indicaciones')->nullable();
+            $table->text('recomendaciones')->nullable();
+            $table->text('ropa_viaje')->nullable();
+            $table->text('permiso_notarial')->nullable();
+            $table->text('voucher')->nullable();
+            $table->text('lista_clinicas')->nullable();
             $table->timestamps();
 
             $table->foreign('packageID')->references('packageID')->on('tr_package');

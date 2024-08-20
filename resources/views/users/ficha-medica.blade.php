@@ -74,8 +74,8 @@
                         <div class="w-full flex ">
                             <ul class="grid w-full md:grid-cols-2">
                                 <li>
-                                    <input type="radio" id="tratamientosi" name="tratamiento" value="tratamientosi"
-                                        class="hidden peer" />
+                                    <input type="radio" id="tratamientosi" name="tratamiento" value="0"
+                                        class="hidden peer" {{ isset($healthSheet) && $healthSheet->tratamiento == 0 ? 'checked' : '' }} />
                                     <label for="tratamientosi"
                                         class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
                                          border-gray-200 rounded-lg rounded-r-none cursor-pointer dark:hover:text-gray-300
@@ -88,8 +88,8 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="tratamientono" name="tratamiento" value="tratamientono"
-                                        class="hidden peer" checked>
+                                    <input type="radio" id="tratamientono" name="tratamiento" value="1"
+                                        class="hidden peer" checked {{ isset($healthSheet) && $healthSheet->tratamiento == 1 ? 'checked' : '' }}>
                                     <label for="tratamientono"
                                         class="inline-flex justify-center w-full p-1.5
                                          text-gray-500 bg-white border border-gray-200
@@ -176,7 +176,7 @@
                         <div class="w-full flex ">
                             <ul class="grid w-full md:grid-cols-2">
                                 <li>
-                                    <input type="radio" id="enfermedadsi" name="enfermedad" value="enfermedadsi"
+                                    <input type="radio" id="enfermedadsi" name="enfermedad" value="0"
                                         class="hidden peer" />
                                     <label for="enfermedadsi"
                                         class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
@@ -190,7 +190,7 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="enfermedadno" name="enfermedad" value="enfermedadno"
+                                    <input type="radio" id="enfermedadno" name="enfermedad" value="1"
                                         class="hidden peer" checked>
                                     <label for="enfermedadno"
                                         class="inline-flex justify-center w-full p-1.5
@@ -278,7 +278,7 @@
                         <div class="w-full flex ">
                             <ul class="grid w-full md:grid-cols-2">
                                 <li>
-                                    <input type="radio" id="medicamentosi" name="medicamento" value="medicamentosi"
+                                    <input type="radio" id="medicamentosi" name="medicamento" value="0"
                                         class="hidden peer" />
                                     <label for="medicamentosi"
                                         class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
@@ -292,7 +292,7 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="medicamentono" name="medicamento" value="medicamentono"
+                                    <input type="radio" id="medicamentono" name="medicamento" value="1"
                                         class="hidden peer" checked>
                                     <label for="medicamentono"
                                         class="inline-flex justify-center w-full p-1.5
@@ -380,7 +380,7 @@
                         <div class="w-full flex ">
                             <ul class="grid w-full md:grid-cols-2">
                                 <li>
-                                    <input type="radio" id="alergiasi" name="alergia" value="alergiasi"
+                                    <input type="radio" id="alergiasi" name="alergia" value="0"
                                         class="hidden peer" />
                                     <label for="alergiasi"
                                         class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
@@ -394,7 +394,7 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="alergiano" name="alergia" value="alergiano"
+                                    <input type="radio" id="alergiano" name="alergia" value="1"
                                         class="hidden peer" checked>
                                     <label for="alergiano"
                                         class="inline-flex justify-center w-full p-1.5

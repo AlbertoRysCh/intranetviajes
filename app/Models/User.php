@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,7 +52,11 @@ class User extends Authenticatable
         'pdf_total_user',
         'pdf_fecha_hora',
     ];
-
+    // Definir la relación con el modelo Checkin
+    public function checkins()
+    {
+        return $this->hasMany(Checkin::class, 'userID', 'id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -62,6 +66,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    /*public function group()
+    {
+    return $this->belongsTo(CreateGroups::class, 'groupID', 'groupID');
+    }*/
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(CreateGroups::class, 'group_user', 'user_id', 'group_id');
+    }
 
     /**
      * The attributes that should be cast.

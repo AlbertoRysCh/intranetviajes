@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\CheckinController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,9 +38,19 @@ Route::get('/travels', [CreateTravelsController::class, 'index']);
 Route::get('/groups', [CreateGroupsController::class, 'index']);
 Route::get('/passengers', [CreatePassengerController::class, 'index']);
 Route::get('/payments', [CreatePaymentsController::class, 'index']);
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/mi-viaje/{groupId}', [DashboardController::class, 'showTripDetails'])->name('tu-viaje');
+Route::get('/mi-viaje/{groupId}/itinerario', [DashboardController::class, 'downloadItinerario'])->name('download-itinerario');
+Route::get('/mi-viaje/{groupId}/indicaciones', [DashboardController::class, 'downloadIndicaciones'])->name('download-indicaciones');
+Route::get('/mi-viaje/{groupId}/recomendaciones', [DashboardController::class, 'downloadRecomendaciones'])->name('download-recomendaciones');
+Route::get('/mi-viaje/{groupId}/ropaviajes', [DashboardController::class, 'downloadRopaViaje'])->name('download-ropaviajes');
+Route::get('/mi-viaje/{groupId}/permisonotarial', [DashboardController::class, 'downloadPermisoNotarial'])->name('download-permisonotarial');
+Route::get('/mi-viaje/{groupId}/voucher', [DashboardController::class, 'downloadVoucher'])->name('download-voucher');
+Route::get('/mi-viaje/{groupId}/listaclinicas', [DashboardController::class, 'downloadListaClinicas'])->name('download-listaclinicas');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -58,9 +69,11 @@ Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('fi
 Route::get('/ficha-nutritional', [Sheet_NutritionalController::class, 'show'])->name('nutritional-sheet.show');
 Route::post('/ficha-nutritional', [Sheet_NutritionalController::class, 'store'])->name('nutritional-sheet.store');
 
-Route::get('/tu-viaje', function () {
-    return view('users.tu-viaje');
-})->middleware(['auth', 'verified'])->name('tu-viaje');
+Route::get('/mi-checkin', [CheckinController::class, 'show'])->name('mi-checkin.show');
+Route::post('/mi-checkin', [CheckinController::class, 'store'])->name('mi-checkin.store');
+
+
+
 
 Route::get('/mi-itinerario', function () {
     return view('users.mi-itinerario');
@@ -73,10 +86,6 @@ Route::get('/mi-fotoyvideo', function () {
 Route::get('/mi-documento', function () {
     return view('users.mi-documento');
 })->middleware(['auth', 'verified'])->name('mi-documento');
-
-Route::get('/mi-checkin', function () {
-    return view('users.mi-checkin');
-})->middleware(['auth', 'verified'])->name('mi-checkin');
 
 Route::get('/mi-cronograma', function () {
     return view('users.mi-cronograma');
