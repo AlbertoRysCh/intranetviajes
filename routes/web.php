@@ -61,6 +61,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/usuarios', [UserController::class, 'show'])->name('users.mis-datos');
 Route::post('/usuarios', [UserController::class, 'update'])->name('user.update');
 Route::put('/usuarios/update-foto', [UserController::class, 'updateFoto'])->name('usuarios.updateFoto');
+Route::post('/upload-users', [UserController::class, 'import'])->name('users.import');
+Route::get('/importar-usuario', [UserController::class, 'importacionUser'])->name('importar.usuario');
+
 
 Route::get('/ficha-medica', [health_sheetController::class, 'show'])->name('ficha-medica.show');
 Route::post('/ficha-medica', [health_sheetController::class, 'store'])->name('ficha-medica.store');

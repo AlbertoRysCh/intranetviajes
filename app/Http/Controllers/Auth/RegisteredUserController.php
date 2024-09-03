@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class RegisteredUserController extends Controller
 {
@@ -35,8 +36,19 @@ class RegisteredUserController extends Controller
             'apellidos' => ['required', 'string', 'max:255'],
             'telefono' => ['required', 'string', 'max:15'],
             'tipo_documento' => ['required', 'string', 'max:255'],
-            'documento' => ['required', 'string', 'max:15'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'documento' => [
+                'required', 
+                'string', 
+                'max:15',
+                function ($attribute, $value, $fail) {
+                    $count = DB::table('users')->where('documento', $value)->count();
+                    if ($count >= 1) {
+                        $fail("El $attribute ya existe más de una vez en el sistema.");
+                    }
+                }
+            ],
+            //'email' => ['required', 'string', 'email', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],  // Agrega la validación para 'username'
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -46,6 +58,7 @@ class RegisteredUserController extends Controller
             'telefono' => $request->telefono,
             'tip_documento' => $request->tipo_documento,
             'documento' => $request->documento,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);

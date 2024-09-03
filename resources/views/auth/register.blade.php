@@ -51,9 +51,12 @@
         <div class="mt-4">
             <x-input-label for="email" :value="__('Correo')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            
         </div>
 
+        <!-- username -->
+      
+        <x-text-input id="username" type="text" name="username" :value="old('username')" />
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Contraseña')" />
@@ -87,4 +90,31 @@
             </x-primary-button>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener los elementos del formulario
+            const nameField = document.getElementById('name');
+            const surnameField = document.getElementById('apellidos');
+            const documentField = document.getElementById('documento');
+            const usernameField = document.getElementById('username');
+
+            function generateUsername() {
+                const name = nameField.value.substring(0, 2).toUpperCase();
+                const surname = surnameField.value.substring(0, 2).toUpperCase();
+                const documentNumber = documentField.value;
+                const username = name + surname + documentNumber;
+
+                usernameField.value = username;
+            }
+
+            // Generar el username cada vez que se cambien estos campos
+            nameField.addEventListener('input', generateUsername);
+            surnameField.addEventListener('input', generateUsername);
+            documentField.addEventListener('input', generateUsername);
+
+            // Generar el username al cargar la página
+            generateUsername();
+        });
+    </script>
 </x-guest-layout>

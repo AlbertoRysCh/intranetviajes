@@ -22,6 +22,7 @@ class User extends Authenticatable
         'groupID',
         'apellidos',
         'telefono',
+        'username',
         'email',
         'password',
         'sexo',

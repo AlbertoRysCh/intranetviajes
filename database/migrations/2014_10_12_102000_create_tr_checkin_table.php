@@ -15,21 +15,16 @@ return new class extends Migration
     {
         Schema::create('tr_checkin', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('travelID');
             $table->unsignedBigInteger('userID');
-            $table->string('tip_documento')->nullable();
-            $table->string('num_documento')->nullable();
-            $table->date('fecha_emi')->nullable();
-            $table->date('fecha_venc')->nullable();
-            $table->string('image_documento')->nullable();
-            $table->string('pass_board')->nullable();
-            $table->string('equipaje_8kg')->nullable();
-            $table->string('equipaje_23kg')->nullable();
-            $table->string('descrip_8kg')->nullable();
-            $table->string('descrip_23kg')->nullable();
+            $table->string('tip_maleta')->nullable();
+            $table->string('num_etiqueta')->nullable();
+            $table->string('color')->nullable();
+            $table->string('caracteristicas')->nullable();
+            $table->string('peso')->nullable();
+            $table->string('images')->nullable();
+            $table->string('lugar_regis')->nullable();
             $table->timestamps();
              // Foreign keys
-             $table->foreign('travelID')->references('travelID')->on('tr_travels')->onDelete('cascade');
              $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
         });
     }

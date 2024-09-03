@@ -48,7 +48,11 @@ Carbon::setLocale('es');
                     <div class="flex flex-row items-center gap-4">
                         <div class="border-2 border-gray-500 ">
                             <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
-                            <p class=" bg-gray-500 text-white px-2">No Disponible</p>
+                            @if (!empty($viaje->itinerario))
+                                <p class=" bg-verde-rv text-white px-2">Disponible</p>
+                            @else
+                                <p class=" bg-gray-500 text-white px-2">No Disponible</p>
+                            @endif
                         </div>
                         <div>
                             <p class="py-2">Revisa el itinerario antes del viaje<br>
@@ -106,7 +110,12 @@ Carbon::setLocale('es');
                             <p class="pb-2">Indicaciones</p>
                             <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
                                 <img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28">
+                                @if (!empty($viaje->indicaciones))
+                                <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                
+                                @else
                                 <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @endif
                             </div>
                         </div>
                         <div class="text-left flex flex-col">
@@ -119,7 +128,11 @@ Carbon::setLocale('es');
                             <p class="pb-2">Recomendaciones</p>
                             <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
                                 <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
-                                <p class=" bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @if (!empty($viaje->recomendaciones))
+                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                @else
+                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @endif
                             </div>
                         </div>
                         <div class="text-left flex flex-col">
@@ -132,7 +145,11 @@ Carbon::setLocale('es');
                             <p class="pb-2">Ropa de Viaje</p>
                             <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
                                 <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
-                                <p class=" bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @if (!empty($viaje->ropa_viaje))
+                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                @else
+                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @endif
                             </div>
                         </div>
                         <div class="text-left flex flex-col">
@@ -145,7 +162,11 @@ Carbon::setLocale('es');
                             <p class="pb-2">Permiso Notarial</p>
                             <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
                                 <p><img src="/images/Icons_ItinerarioPDF.png" alt="" class="w-28"></p>
-                                <p class=" bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @if (!empty($viaje->permiso_notarial))
+                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                @else
+                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @endif
                             </div>
                         </div>
                         <div class="text-left flex flex-col">
@@ -163,7 +184,11 @@ Carbon::setLocale('es');
                             <p class="pb-2">Permiso Notarial</p>
                             <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
                                 <p><img src="/images/Icons_Vaucher.png" alt="" class="w-28"></p>
-                                <p class=" bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @if (!empty($viaje->voucher))
+                                    <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                                @else
+                                    <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @endif
                             </div>
                         </div>
                         <div class="text-left flex flex-col">
@@ -176,7 +201,12 @@ Carbon::setLocale('es');
                             <p class="pb-2">Lista de Clinicas Cercanas al Hotel</p>
                             <div class="border-2 border-gray-500 w-36 flex flex-col items-center">
                                 <p><img src="/images/Icons_Clinicas.png" alt="" class="w-28"></p>
-                                <p class=" bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                                @if (!empty($viaje->lista_clinicas))
+                                <p class="bg-verde-rv text-white px-2 w-full text-center">Disponible</p>
+                            @else
+                                <p class="bg-gray-500 text-white px-2 w-full text-center">No Disponible</p>
+                            @endif
+                                
                             </div>
                         </div>
                         <div class="text-left flex flex-col">

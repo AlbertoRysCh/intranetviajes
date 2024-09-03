@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -148,6 +151,30 @@ class UserController extends Controller
         }
 
         return response()->json(['success' => true, 'avatar_url' => asset('storage/' . $user->foto)]);
+    }
+
+    public function import(Request $request)
+    {
+
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        Excel::import(new UsersImport, $request->file('file')->store('temp'));
+
+        return redirect()->back()->with('success', 'Usuarios importados correctamente');
+    }
+    
+    public function importacionUser(Request $request)
+    {
+        $user = Auth::user();
+        $group = $user->group;
+        $groupName = $group ? $group->nombre_grupo : 'Sin grupo'; // Si no tiene grupo, mostrar "Sin grupo"
+        $nombreEncargado = $group ? $group->nombre_encargado : 'No asignado';
+        $telefonoEncargado = $group ? $group->telefono_encargado : 'No asignado';
+        $json = File::get(public_path('countries.json'));
+        $countries = json_decode($json)->countries;
+        return view('import.users', compact('user','countries', 'groupName', 'nombreEncargado', 'telefonoEncargado'));
     }
     /**
      * Remove the specified resource from storage.

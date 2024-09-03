@@ -20,7 +20,8 @@ module.exports = {
                 'white-rv': '#f8fafc',
                 'red-rv' :  '#CC2A41',
                 'wsp-rv' :  '#25d366',
-                'marfil-rv' : '#F5F5F5'
+                'marfil-rv' : '#F5F5F5',
+                'verde-rv' : '#45B650'
             },
             fontWeight: {
                 extraLight: 100,

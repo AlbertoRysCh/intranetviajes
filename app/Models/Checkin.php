@@ -12,18 +12,14 @@ class Checkin extends Model
 
     // Campos que se pueden asignar de manera masiva
     protected $fillable = [
-        'travelID',
         'userID',
-        'tip_documento',
-        'num_documento',
-        'fecha_emi',
-        'fecha_venc',
-        'image_documento',
-        'pass_board',
-        'equipaje_8kg',
-        'equipaje_23kg',
-        'descrip_8kg',
-        'descrip_23kg',
+        'tip_maleta',
+        'num_etiqueta',
+        'color',
+        'caracteristicas',
+        'peso',
+        'images',
+        'lugar_regis',
     ];
 
     // Definir la relación con el modelo Travel

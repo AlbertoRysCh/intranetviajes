@@ -33,56 +33,43 @@ class CheckinController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-{
-    // Verificar si ya existe un check-in para el usuario actual
-    $checkin = Checkin::where('userID', Auth::id())->first();
+{   
+    // Validación de los datos
+    $request->validate([
+        'maletatype' => 'required|string',
+        'etiquetamaleta' => 'required|string',
+        'colormaleta' => 'required|string',
+        'caracteristicamaleta' => 'nullable|string',
+        'pesomaleta' => 'required|numeric',
+        'fotomaleta' => 'required|array', // Cambiado a 'array' para múltiples archivos
+        'fotomaleta.*' => 'image|mimes:jpeg,png,jpg|max:2048', // Validación individual para archivos
+        'lugarmaleta' => 'required|string',
+    ]);
+    // Crear un nuevo registro de Checkin
+    $checkin = new Checkin();
+    $checkin->userID = Auth::id();
 
-    if ($checkin) {
-        // Si ya existe, actualizar el registro existente
-        $checkin->update([
-            'tip_documento' => $request->input('documentoci'),
-            'num_documento' => $request->input('numero-document-ci'),
-            'fecha_emi' => date('Y-m-d', strtotime($request->input('fecha-emision'))),
-            'fecha_venc' => date('Y-m-d', strtotime($request->input('fecha-vencimiento'))),
-            'descrip_8kg' => $request->input('descrip_equi_8kg'),
-            'descrip_23kg' => $request->input('descrip_equi_23kg'),
-        ]);
-    } else {
-        // Si no existe, crear un nuevo registro
-        $checkin = Checkin::create([
-            'travelID' => $request->input('travelID', 1),
-            'tip_documento' => $request->input('documentoci'),
-            'num_documento' => $request->input('numero-document-ci'),
-            'fecha_emi' => date('Y-m-d', strtotime($request->input('fecha-emision'))),
-            'fecha_venc' => date('Y-m-d', strtotime($request->input('fecha-vencimiento'))),
-            'userID' => Auth::id(),
-            'descrip_8kg' => $request->input('descrip_equi_8kg'),
-            'descrip_23kg' => $request->input('descrip_equi_23kg'),
-        ]);
-    }
-
-    // Manejo de archivos subidos
-    if ($request->hasFile('image_documento')) {
-        $imageName = time() . '.' . $request->file('image_documento')->extension();
-        $request->file('image_documento')->move(public_path('images'), $imageName);
-        $checkin->update(['image_documento' => $imageName]);
+    // Cargar y guardar las imágenes
+    if ($request->hasFile('fotomaleta')) {
+        $imageNames = [];
+        foreach ($request->file('fotomaleta') as $file) {
+            $imageName = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('images/checkins'), $imageName);
+            $imageNames[] = $imageName;
+        }
+        $checkin->images = json_encode($imageNames); // Guardar los nombres de las imágenes en formato JSON
     }
 
-    if ($request->hasFile('pass_boarding_file')) {
-        $passBoardingName = time() . '.' . $request->file('pass_boarding_file')->extension();
-        $request->file('pass_boarding_file')->move(public_path('images'), $passBoardingName);
-        $checkin->update(['pass_board' => $passBoardingName]);
-    }
-    if ($request->hasFile('luggage_file')) {
-        $luggageName = time() . '.' . $request->file('luggage_file')->extension();
-        $request->file('luggage_file')->move(public_path('images'), $luggageName);
-        $checkin->update(['equipaje_8kg' => $luggageName]);
-    }
-    if ($request->hasFile('equipa_23_file')) {
-        $luggage23kgName = time() . '.' . $request->file('equipa_23_file')->extension();
-        $request->file('equipa_23_file')->move(public_path('images'), $luggage23kgName);
-        $checkin->update(['equipaje_23kg' => $luggage23kgName]);
-    }
+    // Guardar los demás campos
+    $checkin->tip_maleta = $request->maletatype;
+    $checkin->num_etiqueta = $request->etiquetamaleta;
+    $checkin->color = $request->colormaleta;
+    $checkin->caracteristicas = $request->caracteristicamaleta;
+    $checkin->peso = $request->pesomaleta;
+    $checkin->lugar_regis = $request->lugarmaleta;
+
+    // Guardar el registro
+    $checkin->save();
 
     // Redirigir a una página de éxito o al dashboard
     return redirect()->route('mi-checkin.show')->with('success', 'Datos del check-in guardados correctamente');
@@ -97,9 +84,20 @@ class CheckinController extends Controller
      */
     public function show()
     {
-        $checkin = Checkin::where('userID', Auth::id())->first(); 
-        //dd($checkin);
-        return view('users.mi-checkin', compact('checkin'));
+        $user_id = Auth::id();
+        $checkin = Checkin::where('userID', Auth::id())->get();
+        $registeredTypes = Checkin::where('userID', $user_id)
+                                ->pluck('tip_maleta')
+                                ->toArray(); 
+        // Todas las opciones posibles de maleta
+        $allTypes = [
+            'Bolso de mano o mochila',
+            'Equipaje de mano (carry on)',
+            'Equipaje de Bodega'
+        ];
+       
+            //dd($checkin);
+        return view('users.mi-checkin', compact('checkin','registeredTypes','allTypes'));
     }
 
     /**
