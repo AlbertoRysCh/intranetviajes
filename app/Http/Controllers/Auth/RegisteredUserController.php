@@ -34,7 +34,6 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'telefono' => ['required', 'string', 'max:15'],
             'tipo_documento' => ['required', 'string', 'max:255'],
             'documento' => [
                 'required', 
@@ -55,18 +54,19 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'apellidos' => $request->apellidos,
-            'telefono' => $request->telefono,
+
             'tip_documento' => $request->tipo_documento,
             'documento' => $request->documento,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'politica' => $request->has('check-politica-proteccion') ? 'si' : 'no',
+            'terminos' => $request->has('check-terminos-condiciones') ? 'si' : 'no',
+            'promociones' => $request->has('check-promociones') ? 'si' : 'no',
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
-
         return redirect(RouteServiceProvider::HOME);
     }
 }

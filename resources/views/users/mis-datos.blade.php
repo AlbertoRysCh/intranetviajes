@@ -12,7 +12,7 @@
                     <p>Ir a mi Perfil</p>
                 </a>
             </div>
-            <div class="flex flex-row gap-4 max-sm:pt-4">
+            <!--<div class="flex flex-row gap-4 max-sm:pt-4">
                 <a href="{{ route('ficha-medica.show') }}"
                     class="flex items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                     <p>Ficha Médica</p>
@@ -21,7 +21,7 @@
                     class="flex items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                     <p>Ficha Nutricional</p>
                 </a>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -30,9 +30,9 @@
         <div class="max-w-7xl mx-auto mt-10 mb-8 sm:px-6 lg:px-8 max-sm:px-6" >
             <div class="flex flex-row text-center gap-6 mb-8 items-center max-sm:flex-col">
                 <h3 class=" font-normal text-5xl">Mis Datos</h3>
-                <div class="w-80 bg-gray-300 rounded-md ">
+                <!--<div class="w-80 bg-gray-300 rounded-md ">
                     <p class="text-center bg-green-400 border border-green-400 rounded-md w-72 ">95% completado</p>
-                </div>
+                </div>-->
             </div>
             <div>
                 <p>En esta sección, puedes actualizar tu perfil personal.
@@ -157,7 +157,7 @@
                         <input datepicker id="default-datepicker" name="nacimiento" type="text"
                             value="{{ $user->nacimiento ? \Carbon\Carbon::parse($user->nacimiento)->format('m/d/Y') : '' }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-rv focus:border-red-rv block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-rv dark:focus:border-red-rv"
-                            placeholder="Selecciona fecha">
+                            placeholder="Selecciona fecha" readonly>
                     </div>
                 </div>
 
@@ -209,8 +209,8 @@
                         Pasajero</label>
                     <div class="mt-2.5">
                         <input type="text" name="celular" id="celular" autocomplete="family-name"
-                            value="{{ $user->telefono }}" readonly disabled
-                            class="bg-gray-50  block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
+                            value="{{ $user->telefono }}" 
+                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -318,7 +318,7 @@
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
-                    <label for="color" class="block text-sm font-semibold leading-6 text-gray-900">Color</label>
+                    <label for="color" class="block text-sm font-semibold leading-6 text-gray-900">Color Favorito</label>
                     <div class="mt-2.5">
                         <input type="text" name="color" id="color" autocomplete="given-name"
                             value="{{ $user->color_fav }}"
@@ -399,7 +399,7 @@
             </div>
 
             <!-- RESPONSABLE GRUPO -->
-            <div
+            <!--<div
                 class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 p-6 py-8 my-8
                  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
@@ -413,7 +413,7 @@
                     <label for="nombre_r" class="block text-sm font-semibold leading-6 text-gray-900">Nombre del
                         Responsable</label>
                     <div class="mt-2.5">
-                        <input type="text" name="nombre_r" id="nombre_r" disabled value="Sandra Quispe"
+                        <input type="text" name="nombre_r" id="nombre_r" disabled value=""
                             autocomplete="given-name"
                             class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
                                 text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -425,7 +425,7 @@
                     <label for="numero_c" class="block text-sm font-semibold leading-6 text-gray-900">Número de
                         Contacto</label>
                     <div class="mt-2.5">
-                        <input type="text" name="numero_c" id="numero_c" disabled value="51 993 540 492"
+                        <input type="text" name="numero_c" id="numero_c" disabled value=""
                             autocomplete="family-name"
                             class="block w-full rounded-md border-0 px-3.5 py-2 bg-slate-300
                                 text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -433,12 +433,12 @@
                                   focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 
             <!-- CORREO PARA NOTIFICACIONES -->
 
-            <div
+            <!--<div
                 class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 p-6 py-8 my-8
                  bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
@@ -481,11 +481,11 @@
                         </label>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <!-- BOTON GUARDAR -->
 
-            <div class="flex flex-row justify-between pb-8 max-sm:flex-col gap-3">
+            <div class="flex flex-row justify-between pb-8 max-sm:flex-col-reverse gap-3">
                 <div>
                     <a href="{{ route('dashboard') }}"
                         class="flex flex-row items-center gap-4  max-sm:w-full border-2 border-gray-400 rounded-full w-48 py-5 justify-center">
@@ -497,53 +497,6 @@
                         <p>Ir a mi Perfil</p>
                     </a>
                 </div>
-
-                <x-danger-button
-                        x-data=""
-                        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-                        >{{ __('Eliminar Cuenta') }}
-                        </x-danger-button>
-                
-                        <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-                            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-                                @csrf
-                                @method('delete')
-                    
-                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                    {{ __('¿Estás seguro de que deseas eliminar tu cuenta?') }}
-                                </h2>
-                    
-                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                    {{ __('Una vez que se elimine su cuenta, todos sus recursos y datos se eliminarán de forma permanente. Ingrese su contraseña para confirmar que desea eliminar su cuenta de forma permanente.') }}
-                                </p>
-                    
-                                <div class="mt-6">
-                                    <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-                    
-                                    <x-text-input
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        class="mt-1 block w-3/4"
-                                        placeholder="{{ __('Contraseña') }}"
-                                    />
-                    
-                                    <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-                                </div>
-                    
-                                <div class="mt-6 flex justify-end">
-                                    <x-secondary-button x-on:click="$dispatch('close')">
-                                        {{ __('Cancelar') }}
-                                    </x-secondary-button>
-                    
-                                    <x-danger-button class="ml-3">
-                                        {{ __('Eliminar Cuenta') }}
-                                    </x-danger-button>
-                                </div>
-                            </form>
-                        </x-modal>
-
-
                 <div id="success-message"
                     class="flex items-center text-green-600 hidden
                      bg-green-100 border border-green-600 rounded p-2 mb-6">

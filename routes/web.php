@@ -73,7 +73,7 @@ Route::get('/ficha-nutritional', [Sheet_NutritionalController::class, 'show'])->
 Route::post('/ficha-nutritional', [Sheet_NutritionalController::class, 'store'])->name('nutritional-sheet.store');
 Route::middleware(['auth'])->group(function () {
 Route::get('/mi-checkin', [CheckinController::class, 'show'])->name('mi-checkin.show');
-
+Route::delete('/mi-checkin/{id}', [CheckinController::class, 'destroy'])->name('mi-checkin.destroy');
 Route::post('/mi-checkin', [CheckinController::class, 'store'])->name('mi-checkin.store')->middleware('auth');
 });
 

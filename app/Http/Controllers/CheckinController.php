@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\LuggageSavedMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Checkin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,12 +39,11 @@ class CheckinController extends Controller
     // Validación de los datos
     $request->validate([
         'maletatype' => 'required|string',
-        'etiquetamaleta' => 'required|string',
         'colormaleta' => 'required|string',
         'caracteristicamaleta' => 'nullable|string',
         'pesomaleta' => 'required|numeric',
         'fotomaleta' => 'required|array', // Cambiado a 'array' para múltiples archivos
-        'fotomaleta.*' => 'image|mimes:jpeg,png,jpg|max:2048', // Validación individual para archivos
+        'fotomaleta.*' => 'image|mimes:jpeg,png,jpg', // Validación individual para archivos
         'lugarmaleta' => 'required|string',
     ]);
     // Crear un nuevo registro de Checkin
@@ -62,7 +63,6 @@ class CheckinController extends Controller
 
     // Guardar los demás campos
     $checkin->tip_maleta = $request->maletatype;
-    $checkin->num_etiqueta = $request->etiquetamaleta;
     $checkin->color = $request->colormaleta;
     $checkin->caracteristicas = $request->caracteristicamaleta;
     $checkin->peso = $request->pesomaleta;
@@ -71,8 +71,18 @@ class CheckinController extends Controller
     // Guardar el registro
     $checkin->save();
 
+    // Enviar el correo electrónico al usuario
+    $luggageDetails = [
+        'maletatype' => $request->maletatype,
+        'colormaleta' => $request->colormaleta,
+        'pesomaleta' => $request->pesomaleta,
+        'lugarmaleta' => $request->lugarmaleta,
+    ];
+
+    Mail::to(Auth::user()->email)->send(new LuggageSavedMail(Auth::user(), $luggageDetails));
+
     // Redirigir a una página de éxito o al dashboard
-    return redirect()->route('mi-checkin.show')->with('success', 'Datos del check-in guardados correctamente');
+    return redirect()->route('mi-checkin.show')->with('success', '¡Equipaje guardado exitosamente!');
 }
 
 
@@ -93,7 +103,7 @@ class CheckinController extends Controller
         $allTypes = [
             'Bolso de mano o mochila',
             'Equipaje de mano (carry on)',
-            'Equipaje de Bodega'
+            '-'
         ];
        
             //dd($checkin);
@@ -132,6 +142,12 @@ class CheckinController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $checkin = Checkin::findOrFail($id);
+    
+    // Elimina el registro
+    $checkin->delete();
+
+    // Redirige con un mensaje de éxito
+    return redirect()->back()->with('success', 'El equipaje ha sido eliminado exitosamente.');
     }
 }

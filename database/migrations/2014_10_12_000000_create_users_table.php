@@ -24,6 +24,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('politica')->nullable();
+            $table->string('terminos')->nullable();
+            $table->string('promociones')->nullable();
             $table->string('sexo')->nullable(); // Hacer nullable si es necesario
             $table->string('tip_documento')->nullable();
             $table->string('documento')->nullable(); // Hacer nullable si es necesario

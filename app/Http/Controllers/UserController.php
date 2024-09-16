@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Imports\UsersImport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -53,13 +50,9 @@ class UserController extends Controller
     public function show()
     {
         $user = Auth::user();
-        $group = $user->group;
-        $groupName = $group ? $group->nombre_grupo : 'Sin grupo'; // Si no tiene grupo, mostrar "Sin grupo"
-        $nombreEncargado = $group ? $group->nombre_encargado : 'No asignado';
-        $telefonoEncargado = $group ? $group->telefono_encargado : 'No asignado';
         $json = File::get(public_path('countries.json'));
         $countries = json_decode($json)->countries;
-        return view('users.mis-datos', compact('user','countries', 'groupName', 'nombreEncargado', 'telefonoEncargado'));
+        return view('users.mis-datos', compact('user','countries'));
     }
 
     /**
@@ -88,22 +81,29 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        /*$user->apellidos = $request->input('apellidos');*/
+     
+        /*$validated = $request->validate([
+            'first-name' => 'required|string|max:255',
+            'last-name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'telefono' => 'nullable|string|max:15',
+            // Agrega otras validaciones según sea necesario
+        ]);*/
+       /*$user->apellidos = $request->input('apellidos');*/ 
         $user->sexo = $request->input('genero');
         $user->tip_documento = $request->input('tipo_documento');
         $user->documento = $request->input('documento');
-        /*$nacimiento = Carbon::createFromFormat('m/d/Y', $request->input('nacimiento'))->format('Y-m-d');
-        $user->nacimiento = $nacimiento;*/
-           // Verificar el formato de la fecha de nacimiento
-    $nacimientoInput = $request->input('nacimiento');
+        $nacimiento = Carbon::createFromFormat('m/d/Y', $request->input('nacimiento'))->format('Y-m-d');
+        /*$user->nacimiento = $nacimiento;*/
+	 // Verificar el formato de la fecha de nacimiento
+    /*$nacimientoInput = $request->input('nacimiento');
     if ($nacimientoInput && \DateTime::createFromFormat('d/m/Y', $nacimientoInput) !== false) {
         $nacimiento = Carbon::createFromFormat('d/m/Y', $nacimientoInput)->format('Y-m-d');
     } else {
         // Si no se proporciona una fecha válida, usar la fecha actual
         $nacimiento = Carbon::now()->format('Y-m-d');
-    }
+    }*/
     $user->nacimiento = $nacimiento;
-
         $user->edad = $request->input('edad');
         $user->direccion = $request->input('direccion');
         $user->telefono = $request->input('celular');
@@ -121,12 +121,20 @@ class UserController extends Controller
         $user->espe_detalles_c = $request->input('esp_detalles_c');
         $user->informacion_ad = $request->input('informacion_ad');
         $user->noti_email = $request->input('email_r');
+        // Agrega otros campos según sea necesario
+        //dd($user);
         $user->save();
 
-        return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
+        //return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
+        return response()->json([
+            'success' => true,
+            'message' => 'Los datos se han cambiado correctamente.'
+        ]);
     }
     public function updateFoto(Request $request)
     {
+	try {
+
         $user = Auth::user();
 
         $request->validate([
@@ -138,7 +146,7 @@ class UserController extends Controller
             $image = Image::make($request->file('avatar'));
 
             if ($image->width() == 512 || $image->height() == 512) {
-                return redirect()->back()->withErrors(['avatar' => 'La imagen debe tener un tamaño de 512x512 píxeles.']);
+                return response()->json(['success' => false, 'message' => 'La imagen debe tener un tamaño de 512x512 píxeles.']);
             }
             if ($user->foto) {
                 Storage::delete('public/' . $user->foto);
@@ -151,31 +159,10 @@ class UserController extends Controller
         }
 
         return response()->json(['success' => true, 'avatar_url' => asset('storage/' . $user->foto)]);
+    }catch (\Exception $e) {
+        return response()->json(['success' => false, 'message' => $e->getMessage()]);
     }
-
-    public function import(Request $request)
-    {
-
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv',
-        ]);
-
-        Excel::import(new UsersImport, $request->file('file')->store('temp'));
-
-        return redirect()->back()->with('success', 'Usuarios importados correctamente');
-    }
-    
-    public function importacionUser(Request $request)
-    {
-        $user = Auth::user();
-        $group = $user->group;
-        $groupName = $group ? $group->nombre_grupo : 'Sin grupo'; // Si no tiene grupo, mostrar "Sin grupo"
-        $nombreEncargado = $group ? $group->nombre_encargado : 'No asignado';
-        $telefonoEncargado = $group ? $group->telefono_encargado : 'No asignado';
-        $json = File::get(public_path('countries.json'));
-        $countries = json_decode($json)->countries;
-        return view('import.users', compact('user','countries', 'groupName', 'nombreEncargado', 'telefonoEncargado'));
-    }
+}
     /**
      * Remove the specified resource from storage.
      *
