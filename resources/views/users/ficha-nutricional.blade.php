@@ -1,28 +1,47 @@
 <x-approxana-layout>
-    <div class="m-6 text-center sm:pt-12 sm:text-left">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-red-rv dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-1 sm:grid-cols-3 p-6 gap-4">
-                <div class="flex flex-col md:flex-row justify-between items-center sm:col-span-2">
-                    <div class="p-5 text-white-rv dark:text-gray-100 text-lg sm:pl-16">
-                        <div class="text-white-rv text-3xl">
-                            {!! __('¡Hola ,') !!} <b>{{ explode(' ', Auth::user()->name)[0] }}
-                                {{ explode(' ', Auth::user()->apellidos)[0] }}</b>!<br>
-                        </div>
-
-                        <p class="mt-4 text-white-rv-400 text-base font-Light">
-                            {!! __(
-                                'Para asegurar que tus preferencias y restricciones alimentarias se tengan en cuenta durante tu viaje, por favor completa los siguientes campos con la información requerida.',
-                            ) !!}
-                        </p>
-                    </div>
-                </div>
-                <div class="p-0 text-white-rv dark:text-gray-100 pr-16 pt-5">
-                    <img src="/images/health.png" alt="" class="pb-0 w-64">
-                </div>
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 flex flex-row justify-between max-sm:flex-col max-sm:px-4">
+            <div>
+                <a href="{{ route('dashboard') }}"
+                    class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                    </svg>
+                    <p>Ir a mi Perfil</p>
+                </a>
+            </div>
+            <div class="flex flex-row gap-4 max-sm:pt-4">
+                <a href="{{ route('users.mis-datos') }}"
+                    class="flex items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                    <p>Mis Datos</p>
+                </a>
+                <a href="{{ route('ficha-medica.show') }}"
+                    class="flex items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                    <p>Ficha Médica</p>
+                </a>
             </div>
         </div>
     </div>
 
+
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto mt-10 sm:px-6 lg:px-8 max-sm:px-4">
+            <div class="flex flex-row text-center gap-6 mb-8 items-center max-sm:flex-col">
+                <h3 class=" font-normal text-5xl">Ficha Nutricional</h3>
+                <div class="w-80 bg-gray-300 rounded-md ">
+                    <p class="text-center bg-green-400 border border-green-400 rounded-md w-72 ">95% completado</p>
+                </div>
+            </div>
+            <div class="flex flex-row items-center">
+                <img src="/images/health.png" alt="">
+                <p>Para asegurar que tus preferencias y restricciones alimentaria<br> 
+                    se tengan en cuenta durante tu viaje, por favor completa los <br>
+                     siguientes campos con la información requerida.</p>
+            </div>
+        </div>
+    </div>
 
     <!--- div formulario --->
 
@@ -31,12 +50,15 @@
             <form action="{{ route('nutritional-sheet.store') }}" method="POST">
                 @csrf
                 <!-- MIS DATOS PERSONALES -->
-                <x-texthead>
-                    {{ __('Mi Ficha Nutricional') }}
-                </x-texthead>
-                <div class="grid grid-cols-1 gap-4 p-6  bg-white border border-gray-200 rounded-lg shadow">
+
+                <div class="grid grid-cols-1 gap-4 p-6 my-8  bg-white border border-gray-200 rounded-lg shadow">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class="col-span-3">
+                            <x-texthead>
+                                {{ __('Mi Ficha Nutricional') }}
+                            </x-texthead>
+                        </div>
+                        <div class=" max-sm:col-span-3">
                             <label for="peso"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Peso</label>
                             <div class="mt-2.5">
@@ -45,7 +67,7 @@
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="talla"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Talla</label>
                             <div class="mt-2.5">
@@ -54,7 +76,7 @@
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="act_fisica"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Actividad
                                 Física</label>
@@ -84,7 +106,7 @@
                     <!--- PRIMERA PREGUNTA --->
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="tiposAlimentacion"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Tipos de
                                 Alimentacion</label>
@@ -114,7 +136,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" col-span-2">
+                        <div class=" col-span-2 max-sm:col-span-3">
                             <label for="edtiposAlimentacion"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
@@ -136,7 +158,7 @@
                     <!--- SEGUNDA PREGUNTA --->
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="alergiasAlimentarias"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Alergias
                                 Alimentarias</label>
@@ -164,13 +186,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" col-span-2">
+                        <div class=" col-span-2 max-sm:col-span-3">
                             <label for="edalergiasAlimentarias"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
                             <div class="mt-2.5">
-                                <input type="text" name="edalergiasAlimentarias" id="edalergiasAlimentarias" disabled
-                                    placeholder="Ejemplo: Dificutad para respirar por ingesta de mariscos."
+                                <input type="text" name="edalergiasAlimentarias" id="edalergiasAlimentarias"
+                                    disabled placeholder="Ejemplo: Dificutad para respirar por ingesta de mariscos."
                                     value="{{ isset($nutritionalSheet) ? $nutritionalSheet->detalles_alergias : '' }}"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 bg-white
                                     text-black shadow-sm ring-1 ring-inset ring-gray-300
@@ -184,7 +206,7 @@
                     <!--- TERCERA PREGUNTA --->
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="noConsume" class="block text-sm font-semibold leading-6 text-gray-900">¿ Que
                                 tipos de Alimentos no consumes ?</label>
                             <div class="mt-2.5">
@@ -211,7 +233,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" col-span-2">
+                        <div class=" col-span-2 max-sm:col-span-3">
                             <label for="ednoConsume"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
@@ -232,7 +254,7 @@
                     <!--- CUARTA PREGUNTA --->
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="habitosAlimentarios"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Habitos
                                 Alimentarios</label>
@@ -257,7 +279,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" col-span-2">
+                        <div class=" col-span-2 max-sm:col-span-3">
                             <label for="edhabitosAlimentarios"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
@@ -278,7 +300,7 @@
                     <!--- QUINTA PREGUNTA --->
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="preferenciaComida"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Preferencias de
                                 Comidas</label>
@@ -306,7 +328,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" col-span-2">
+                        <div class=" col-span-2 max-sm:col-span-3">
                             <label for="edpreferenciaComida"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
@@ -327,7 +349,7 @@
                     <!--- SEXTA PREGUNTA --->
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
+                        <div class=" max-sm:col-span-3">
                             <label for="siguesDieta"
                                 class="block text-sm font-semibold leading-6 text-gray-900">¿Sigues algun tipo de
                                 Dieta?</label>
@@ -346,7 +368,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" col-span-2">
+                        <div class=" col-span-2 max-sm:col-span-3">
                             <label for="edsiguesDieta"
                                 class="block text-sm font-semibold leading-6 text-gray-900">Especificar
                                 Detalles</label>
@@ -365,50 +387,50 @@
                 </div>
 
                 <!-- BOTONES GUARDAR -->
-
-                <div class="my-10 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3 max-sm:hidden">
-                    <div class="text-start">
-                        <a href="{{ URL::previous() }}">Volver</a>
+                <div class="flex  flex-row justify-between pb-8 max-sm:flex-col gap-3">
+                    <div >
+                        <a href="{{ route('dashboard') }}"
+                            class="flex flex-row items-center gap-4 border-2 border-gray-400 max-sm:w-full rounded-full w-48 py-5 justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                            </svg>
+                            <p>Ir a mi Perfil</p>
+                        </a>
+                    </div>
+                    <div id="success-message"
+                        class="flex items-center text-green-600 hidden
+                         bg-green-100 border border-green-600 rounded p-2 mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span id="success-text"></span>
                     </div>
                     <div>
                         <button type="submit"
-                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
-                        text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-red-rv focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv">
+                            class="block w-full rounded-full bg-red-rv px-16 py-5
+                                text-center text-sm font-semibold text-white shadow-sm
+                                hover:bg-red-rv">
                             GUARDAR CAMBIOS
                         </button>
-                    </div>
-                    <div class="text-end">
-                        <a href="/dashboard">Inicio</a>
-                    </div>
-                </div>
-
-                <!-- BOTONES GUARDAR PHONE -->
-                <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 sm:hidden">
-
-                    <div class="col-span-2">
-                        <button type="submit"
-                            class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
-                        text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-red-rv focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv ">
-                            GUARDAR CAMBIOS
-                        </button>
-                    </div>
-                    <div class="text-start">
-                        <a href="{{ URL::previous() }}">Volver</a>
-                    </div>
-                    <div class="text-end">
-                        <a href="/dashboard">Inicio</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tiposAlimentacion = document.getElementById('tiposAlimentacion');

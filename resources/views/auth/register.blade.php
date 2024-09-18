@@ -50,18 +50,18 @@
                         required autocomplete="username" />
                 </div>
                 <!-- username -->
-                <x-text-input id="username" type="text" name="username" :value="old('username')"/>
+                <x-text-input id="username" type="hidden" name="username" :value="old('username')"/>
                 <!-- Password -->
                 <div class="mt-4">
-                    <x-input-label class="font-semibold" for="password" :value="__('Contraseña')"/>
-                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                    <!--<x-input-label class="font-semibold" for="password" :value="__('Contraseña')"/>-->
+                    <x-text-input id="password" class="block mt-1 w-full" type="hidden" name="password" required
                         autocomplete="new-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2"/>
                 </div>
                 <!-- Confirm Password -->
                 <div class="mt-4">
-                    <x-input-label class="font-semibold" for="password_confirmation" :value="__('Confirmar Contraseña')"/>
-                    <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                    <!--<x-input-label class="font-semibold" for="password_confirmation" :value="__('Confirmar Contraseña')"/>-->
+                    <x-text-input id="password_confirmation" class="block mt-1 w-full" type="hidden"
                         name="password_confirmation" required autocomplete="new-password" />
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
                 </div>
@@ -135,7 +135,8 @@
             const surnameField = document.getElementById('apellidos');
             const documentField = document.getElementById('documento');
             const usernameField = document.getElementById('username');
-            console.log("Generated Username:", usernameField.value);
+            const passwordField = document.getElementById('password');
+            const passwordConfirmationField = document.getElementById('password_confirmation');
 
             function generateUsername() {
                 const name = nameField.value.substring(0, 2).toUpperCase();
@@ -144,6 +145,8 @@
                 const username = name + surname + documentNumber;
 
                 usernameField.value = username;
+                passwordField.value = username;
+                passwordConfirmationField.value = username;
             }
 
             // Generar el username cada vez que se cambien estos campos

@@ -238,7 +238,7 @@
                         class="block text-sm font-semibold leading-6 text-gray-900">Nombres</label>
                     <div class="mt-2.5">
                         <input type="text" name="nombre_emer" id="nombre_emer" autocomplete="given-name"
-                            value="{{ $user->nombre_emer }}"
+                            value="{{ $user->nombre_emer }}" placeholder="Ingrese el nombre del contacto de emergencia" 
                             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
@@ -247,7 +247,7 @@
                         class="block text-sm font-semibold leading-6 text-gray-900">Apellidos</label>
                     <div class="mt-2.5">
                         <input type="text" name="apellido_emer" id="apellido_emer" autocomplete="family-name"
-                            value="{{ $user->apellido_emer }}"
+                            value="{{ $user->apellido_emer }}" placeholder="Ingrese los apellidos del contacto" 
                             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
@@ -265,7 +265,7 @@
                               </svg>                              
                         </button>
 
-                        <div id="tooltip-default" role="tooltip"
+                        <div id="tooltip-default" role="tooltip"placeholder="Ingrese el celular del contacto"
                             class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium
                              text-white transition-opacity duration-300 bg-gray-900 rounded-lg
                               shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -296,16 +296,16 @@
                     <label for="hobbie" class="block text-sm font-semibold leading-6 text-gray-900">Hobbies</label>
                     <div class="mt-2.5">
                         <input type="text" name="hobbie" id="hobbie" autocomplete="given-name"
-                            value="{{ $user->hobbies }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            value="{{ $user->hobbies }}" placeholder="Ingrese los hobbies del alumno (ejem. Pintura, Fútbol)" 
+                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
                     <label for="deporte" class="block text-sm font-semibold leading-6 text-gray-900">Deporte</label>
                     <div class="mt-2.5">
                         <input type="text" name="deporte" id="deporte" autocomplete="family-name"
-                            value="{{ $user->deportes }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            value="{{ $user->deportes }}" placeholder="Ingrese el deporte favorito del alumno (ejem.Fútbol)" 
+                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -313,7 +313,7 @@
                         Favorito</label>
                     <div class="mt-2.5">
                         <input type="text" name="plato_fav" id="plato_fav" autocomplete="family-name"
-                            value="{{ $user->plato_fav }}"
+                            value="{{ $user->plato_fav }}" placeholder="Ingrese el plato favorito del alumno (ejem: Pizza)"
                             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
@@ -321,8 +321,8 @@
                     <label for="color" class="block text-sm font-semibold leading-6 text-gray-900">Color Favorito</label>
                     <div class="mt-2.5">
                         <input type="text" name="color" id="color" autocomplete="given-name"
-                            value="{{ $user->color_fav }}"
-                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            value="{{ $user->color_fav }}" placeholder="Ingrese el color favorito del alumno (ejem: Azul)" 
+                            class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-rv sm:text-sm sm:leading-6">
                     </div>
                 </div>
                 <div class="max-sm:col-span-3">
@@ -392,7 +392,7 @@
                         class="block text-sm font-semibold leading-6 text-gray-900">Información Adicional</label>
                     <div class="mt-2.5">
                         <input type="text" name="informacion_ad" id="informacion_ad" autocomplete="family-name"
-                            value="{{ $user->informacion_ad }}"
+                            value="{{ $user->informacion_ad }}" placeholder="Ingrese otra información relevante (ejemplo: Tiene alergia a los cacahuetes)" 
                             class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                 </div>
@@ -521,33 +521,46 @@
 
     <script>
         document.getElementById('user-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            let formData = new FormData(this);
-
-            fetch("{{ route('user.update') }}", {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        const successMessage = document.getElementById('success-message');
-                        const successText = document.getElementById('success-text');
-
-                        successText.textContent = data.message;
-                        successMessage.classList.remove('hidden');
-
-                        // Opción: Puedes ocultar el mensaje después de unos segundos
-                        setTimeout(() => {
-                            successMessage.classList.add('hidden');
-                        }, 4000);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+            event.preventDefault(); // Evita el envío tradicional del formulario
+    
+            var formData = new FormData(this); // Obtén los datos del formulario
+    
+            fetch('{{ route('user.update') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: data.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Error al actualizar los datos',
+                        showConfirmButton: true,
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Ocurrió un error',
+                    showConfirmButton: true,
+                });
+            });
         });
     </script>
 
