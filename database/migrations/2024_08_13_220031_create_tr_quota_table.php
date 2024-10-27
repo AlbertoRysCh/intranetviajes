@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('tr_quota', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('travelID');
-            $table->unsignedBigInteger('userID');
+            $table->unsignedBigInteger('group_user');
             $table->string('codigo');
             $table->float('quota');
             $table->float('amount');
@@ -25,8 +24,7 @@ return new class extends Migration
             $table->string('valid_status');
             $table->text('resume');
             $table->timestamps();
-            $table->foreign('travelID')->references('travelID')->on('tr_travels');
-            $table->foreign('userID')->references('id')->on('users');
+            $table->foreign('group_user')->references('id')->on('group_user');
         });
     }
 

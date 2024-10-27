@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Mail\CamposCompletadosMail;
 class UserController extends Controller
 {
     /**
@@ -29,7 +30,20 @@ class UserController extends Controller
     {
         //
     }
+    public function enviarCorreo(Request $request)
+{
+    // Obtén el correo del usuario autenticado
+    $usuario = Auth::user();
+    $email = $usuario->email;  // Acceder al correo desde la columna email
 
+    // Obtén el mensaje del request, si lo necesitas
+    $mensaje = $request->input('mensaje', 'Has completado el 100% de tus datos.');
+
+    // Enviar el correo usando la clase de mail
+    Mail::to($email)->send(new CamposCompletadosMail($mensaje));
+
+    return response()->json(['success' => true]);
+}
     /**
      * Store a newly created resource in storage.
      *
@@ -70,7 +84,6 @@ class UserController extends Controller
 
         return view('users.edit', compact('user', 'countries'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -81,11 +94,29 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
+     
+        /*$validated = $request->validate([
+            'first-name' => 'required|string|max:255',
+            'last-name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'telefono' => 'nullable|string|max:15',
+            // Agrega otras validaciones según sea necesario
+        ]);*/
+       /*$user->apellidos = $request->input('apellidos');*/ 
         $user->sexo = $request->input('genero');
         $user->tip_documento = $request->input('tipo_documento');
         $user->documento = $request->input('documento');
         $nacimiento = Carbon::createFromFormat('m/d/Y', $request->input('nacimiento'))->format('Y-m-d');
-        $user->nacimiento = $nacimiento;
+        /*$user->nacimiento = $nacimiento;*/
+	 // Verificar el formato de la fecha de nacimiento
+    /*$nacimientoInput = $request->input('nacimiento');
+    if ($nacimientoInput && \DateTime::createFromFormat('d/m/Y', $nacimientoInput) !== false) {
+        $nacimiento = Carbon::createFromFormat('d/m/Y', $nacimientoInput)->format('Y-m-d');
+    } else {
+        // Si no se proporciona una fecha válida, usar la fecha actual
+        $nacimiento = Carbon::now()->format('Y-m-d');
+    }*/
+    $user->nacimiento = $nacimiento;
         $user->edad = $request->input('edad');
         $user->direccion = $request->input('direccion');
         $user->telefono = $request->input('celular');
@@ -103,8 +134,11 @@ class UserController extends Controller
         $user->espe_detalles_c = $request->input('esp_detalles_c');
         $user->informacion_ad = $request->input('informacion_ad');
         $user->noti_email = $request->input('email_r');
+        // Agrega otros campos según sea necesario
+        //dd($user);
         $user->save();
 
+        //return redirect()->route('users.mis-datos')->with('success', 'Datos actualizados correctamente');
         return response()->json([
             'success' => true,
             'message' => 'Los datos se han cambiado correctamente.'

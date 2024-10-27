@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="{{ asset('tailadmin/style.css') }}">
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  @livewireStyles
 </head>
 
   <body x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode')); $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))" :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
@@ -414,5 +417,6 @@
     <!-- ===== Page Wrapper End ===== -->
   <!-- TailAdmin JS -->
   <script src="{{ asset('tailadmin/bundle.js') }}"></script>
+  @livewireScripts
 </body>
 </html>

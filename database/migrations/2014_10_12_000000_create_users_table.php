@@ -24,6 +24,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('nombre_padre1')->nullable();
+            $table->string('apellido_padre1')->nullable();
+            $table->string('telefono_padre1')->nullable();
+            $table->string('nombre_padre2')->nullable();
+            $table->string('apellido_padre2')->nullable();
+            $table->string('telefono_padre2')->nullable();
             $table->string('politica')->nullable();
             $table->string('terminos')->nullable();
             $table->string('promociones')->nullable();

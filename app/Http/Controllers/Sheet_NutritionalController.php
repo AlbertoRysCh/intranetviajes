@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SheetNutritional;
+use App\Mail\CamposCompletadosMailFichaN;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 class Sheet_NutritionalController extends Controller
 {
@@ -26,7 +28,20 @@ class Sheet_NutritionalController extends Controller
     {
         //
     }
+    public function enviarCorreoN(Request $request)
+    {
+    // Obtén el correo del usuario autenticado
+    $usuario = Auth::user();
+    $email = $usuario->email;
 
+    // Obtén el mensaje del request
+    $mensaje = $request->input('mensaje', 'Has completado el 100% de tus datos.');
+
+    // Envía el correo
+    Mail::to($email)->send(new CamposCompletadosMailFichaN($mensaje));
+    //dd('Correo enviado');
+    return response()->json(['success' => true]);
+    }
     /**
      * Store a newly created resource in storage.
      *

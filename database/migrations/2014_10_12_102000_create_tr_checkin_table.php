@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('caracteristicas')->nullable();
             $table->string('peso')->nullable();
             $table->string('images')->nullable();
+            $table->string('images1')->nullable();
+            $table->string('images2')->nullable();
             $table->string('lugar_regis')->nullable();
             $table->timestamps();
              // Foreign keys

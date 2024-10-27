@@ -1,187 +1,92 @@
 <x-approxana-layout>
-
-    <div class="pt-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-red-rv dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-3">
-                <div class="flex flex-col md:flex-row justify-between items-center col-span-2">
-                    <div class="p-5 text-white-rv dark:text-gray-100 text-lg pl-16">
-                        <div class="text-white-rv text-3xl">
-                            {!! __('¡Hola ,') !!} <b>{{ Auth::user()->name }} {{ Auth::user()->apellidos }}</b>!<br>
-                        </div>
-
-                        <p class="mt-4 text-white-rv-400 text-base font-extraLight">
-                            {!! __(
-                                'Aquí puedes visualizar tu cronograma de pagos de manera sencilla y rápida. Revisa las fechas de vencimiento, el monto y el número de cuota.',
-                            ) !!}
-                        </p>
-                    </div>
-                </div>
-                <div class="p-0 text-white-rv dark:text-gray-100 pr-16 pt-5">
-                    <img src="/images/nurse.png" alt="" class="pb-0 w-64">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!--- div formulario --->
-
-    <div class="py-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- MIS DATOS PERSONALES -->
-            <x-texthead>
-                {{ __('Cronograma') }}
-            </x-texthead>
-
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                class=" w-full text-white bg-red-rv hover:bg-red-rv 
-                 font-medium rounded-lg  px-5 py-2.5  flex flex-wrap justify-between items-center my-4"
-                type="button">
-                <p class=" font-black text-lg">Viaje a Cancún <span class=" font-thin"> Código de programa: VPPE01</span></p>
-                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 4 4 4-4" />
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 max-sm:pl-8">
+            <a href="{{ route('mi-pagos') }}"
+                class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
                 </svg>
-            </button>
-
-            <!-- Dropdown menu -->
-            <div id="dropdown"
-                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow max-w-7xl dark:bg-gray-700" >
-
-                <div class="bg-red-rv w-full p-6">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-white">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        Cuota
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Fecha Vencimiento
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Moneda
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Monto
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        1
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        04/04/2024
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Dolares
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $300
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        2
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        04/05/2024
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Dolares
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $300
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        3
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        04/06/2024
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Dolares
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $300
-                                    </td>
-                                </tr>
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        4
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        04/07/2024
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Dolares
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $300
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        5
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        04/08/2024
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Dolares
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $300
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- BOTONES GUARDAR -->
-
-            <div class="my-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-2">
-                <div class="text-start">
-                    <a href="#">Volver</a>
-                </div>
-                <!--<div>
-                    <button type="submit"
-                        class="block w-full rounded-md bg-red-rv px-3.5 py-2.5 
-                        text-center text-sm font-semibold text-white shadow-sm 
-                        hover:bg-red-rv focus-visible:outline 
-                        focus-visible:outline-2 focus-visible:outline-offset-2
-                         focus-visible:outline--red-rv">
-                        DESCARGAR TODO
-                    </button>
-                </div>-->
-                <div class="text-end">
-                    <a href="#">Siguiente</a>
-                </div>
-            </div>
-
-
+                <p>Ir Inicio</p>
+            </a>
         </div>
     </div>
 
+    <div class="mt-6 text-center sm:text-left">
+        <div class="max-w-6xl mx-auto my-10">
+            <div class="flex flex-col max-sm:px-3">
+                <p class="text-5xl">Viaje a <span class="font-bold">Cancún</span></p>
+            </div>
+            <div class="flex flex-row pt-4 gap-6">
+                <p>Fecha <span>23 de Setiembre</span> </p>
+                <p>Codigo de programa: <span>VPPE01</span> </p>
+            </div>
+        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+    <div class="pb-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-white p-6">
+                <div class="flex flex-row justify-between items-center border-b-2 border-gray-400 pb-4">
+                    <p class="font-bold text-xl">Cronograma</p>
+                    <a href="" class="border px-8 py-2 rounded-full border-gray-500 hover:bg-red-rv hover:border-red-rv hover:text-white">Estado de Pagos</a>
+                </div>
 
+                <div class="py-6 w-full">
+                    <table class="table-fixed w-full text-center">
+                        <thead>
+                            <tr class="text-gray-400 my-4">
+                                <th class="py-4 font-semibold">Cuota N°</th>
+                                <th class="py-4 font-semibold">Fecha de Vencimiento</th>
+                                <th class="py-4 font-semibold">Moneda</th>
+                                <th class="py-4 font-semibold">Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class=" bg-gray-100 py-4 ">
+                                <td class="py-4">1</td>
+                                <td class="py-4">04/02/24</td>
+                                <td class="py-4">Dólares ($USD)</td>
+                                <td class="py-4">300</td>
+                            </tr>
+                            <tr class="py-4">
+                                <td class="py-4">2</td>
+                                <td class="py-4">04/03/24</td>
+                                <td class="py-4">Dólares ($USD)</td>
+                                <td class="py-4">300</td>
+                            </tr>
+                            <tr class="bg-gray-100 py-4">
+                                <td class="py-4">3</td>
+                                <td class="py-4">04/04/24</td>
+                                <td class="py-4">Dólares ($USD)</td>
+                                <td class="py-4">300</td>
+                            </tr>
+                            <tr class="">
+                                <td class="py-4">4</td>
+                                <td class="py-4">04/05/24</td>
+                                <td class="py-4">Dólares ($USD)</td>
+                                <td class="py-4">300</td>
+                            </tr>
+                            <tr class="bg-gray-100 py-4">
+                                <td class="py-4">5</td>
+                                <td class="py-4">04/06/24</td>
+                                <td class="py-4">Dólares ($USD)</td>
+                                <td class="py-4">300</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
+                <div class="flex flex-row justify-between items-center  py-4">
+                    <div>
+                        <p>Monto Total: <span>$USD</span> <span>1500.00</span> <span>dolares</span></p>
+                    </div>
+
+                    <div>
+                        <a href="" class="border px-10 py-2 rounded-full border-gray-500 hover:bg-red-rv hover:border-red-rv hover:text-white">Descargar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-approxana-layout>

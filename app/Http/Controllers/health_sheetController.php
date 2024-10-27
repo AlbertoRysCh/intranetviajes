@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HealthSheet;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\CamposCompletadosMailFichaM;
+use Illuminate\Support\Facades\Mail;
 class health_sheetController extends Controller
 {
     /**
@@ -26,7 +28,20 @@ class health_sheetController extends Controller
     {
         //
     }
+    public function enviarCorreoF(Request $request)
+    {
+    // Obtén el correo del usuario autenticado
+    $usuario = Auth::user();
+    $email = $usuario->email;
 
+    // Obtén el mensaje del request
+    $mensaje = $request->input('mensaje', 'Has completado el 100% de tus datos.');
+
+    // Envía el correo
+    Mail::to($email)->send(new CamposCompletadosMailFichaM($mensaje));
+    //dd('Correo enviado');
+    return response()->json(['success' => true]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -39,7 +54,36 @@ class health_sheetController extends Controller
         $request->validate([
             'g_sanguineo' => 'required|string',
             'factor_rh' => 'required|string',
+            'hist_medic' => 'nullable|file|mimes:pdf|max:2048',
+            'hist_salud_em' => 'nullable|file|mimes:pdf|max:2048',
         ]);
+
+        // Manejar la carga de archivos
+        $histMedicPath = null;
+        $histSaludEmPath = null;
+
+        // Historial Médico
+        if ($request->hasFile('hist_medic')) {
+            $histMedicPath = $request->file('hist_medic')->store('health_sheets', 'public');
+        } else {
+            // Mantener el valor existente si no se carga un nuevo archivo
+            $existingHealthSheet = HealthSheet::where('userID', Auth::id())->first();
+            if ($existingHealthSheet) {
+                $histMedicPath = $existingHealthSheet->hist_medico;
+            }
+        }
+
+          // Historial de Salud Emocional
+        if ($request->hasFile('hist_salud_em')) {
+            $histSaludEmPath = $request->file('hist_salud_em')->store('health_sheets', 'public');
+        } else {
+            // Mantener el valor existente si no se carga un nuevo archivo
+            $existingHealthSheet = $existingHealthSheet ?? HealthSheet::where('userID', Auth::id())->first();
+            if ($existingHealthSheet) {
+                $histSaludEmPath = $existingHealthSheet->hist_med_em;
+            }
+        }
+
         $inmunizaciones = implode(',', $request->input('inmunizacion', []));
         // Crear o actualizar la ficha médica del usuario logueado
         $healthSheet = HealthSheet::updateOrCreate(
@@ -78,8 +122,8 @@ class health_sheetController extends Controller
                 'informacion_adicional_salud' => $request->input('info_ad'),
                 'tarjeta_seguro_medico' => $request->input('tar_seguro'),
                 'tarjeta_seguro_privado' => $request->input('tar_seguro_priv'),
-                'hist_medico' => $request->input('hist_medic'),
-                'hist_med_em' => $request->input('hist_salud_em'),
+                'hist_medico' => $histMedicPath,
+                'hist_med_em' => $histSaludEmPath,
 
             ]
         );

@@ -19,6 +19,8 @@ class Checkin extends Model
         'caracteristicas',
         'peso',
         'images',
+        'images1',
+        'images2',
         'lugar_regis',
     ];
 

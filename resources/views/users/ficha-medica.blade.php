@@ -30,8 +30,8 @@
         <div class="max-w-7xl mx-auto mt-10 sm:px-6 lg:px-8 max-sm:px-4">
             <div class="flex flex-row text-center gap-6 mb-8 items-center max-sm:flex-col">
                 <h3 class=" font-normal text-5xl">Ficha Médica</h3>
-                <div class="w-80 bg-gray-300 rounded-md ">
-                    <p class="text-center bg-green-400 border border-green-400 rounded-md w-72 ">95% completado</p>
+                <div class="progress w-80 bg-gray-300 rounded-md">
+                    <p class="progress-bar text-center bg-green-400 border border-green-400 rounded-md w-72" role="progressbar" id="progress-bar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0% completado</p>
                 </div>
             </div>
             <div class="flex flex-row items-center">
@@ -48,7 +48,7 @@
 
     <div class="p-6 pt-0 sm:py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('ficha-medica.store') }}" method="POST">
+            <form action="{{ route('ficha-medica.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- MIS DATOS PERSONALES -->
 
@@ -67,7 +67,7 @@
                                 Sanguíneo</label>
                             <div class="mt-2.5">
                                 <select id="g_sanguineo" name="g_sanguineo"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <option value="Seleccionar opción"
                                         {{ isset($healthSheet) && $healthSheet->grupo_sanguineo == 'Seleccionar opción' ? 'selected' : '' }}>
                                         Seleccionar opción</option>
@@ -90,8 +90,8 @@
                             <label for="factor_rh" class="block text-sm font-semibold leading-6 text-gray-900">Factor
                                 Rh</label>
                             <div class="mt-2.5">
-                                <select id="factor_rh" name="factor_rh"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <select id="factor_rh" name="factor_rh" 
+                                    class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <option value="seleccionar opcion"
                                         {{ isset($healthSheet) && $healthSheet->factor_rh == 'Seleccionar opción' ? 'selected' : '' }}>
                                         Seleccionar opción</option>
@@ -113,7 +113,7 @@
                                 <ul class="grid w-full md:grid-cols-2">
                                     <li>
                                         <input type="radio" id="tratamientosi" name="tratamiento"
-                                            value="tratamientosi" class="hidden peer" />
+                                            value="si" class="progress-field hidden peer" {{ isset($healthSheet->tratamiento) && $healthSheet->tratamiento == 'si' ? 'checked' : '' }} />
                                         <label for="tratamientosi"
                                             class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
                                              border-gray-200 rounded-lg rounded-r-none cursor-pointer dark:hover:text-gray-300
@@ -127,7 +127,7 @@
                                     </li>
                                     <li>
                                         <input type="radio" id="tratamientono" name="tratamiento"
-                                            value="tratamientono" class="hidden peer" checked>
+                                            value="no" class="hidden peer" {{ isset($healthSheet->tratamiento) && $healthSheet->tratamiento == 'no' ? 'checked' : '' }} />
                                         <label for="tratamientono"
                                             class="inline-flex justify-center w-full p-1.5
                                              text-gray-500 bg-white border border-gray-200
@@ -153,7 +153,7 @@
                                     <input type="text" name="obs_tratamiento" id="obs_tratamiento"
                                         autocomplete="given-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->tratamiento_obs : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -164,7 +164,7 @@
                                     <input type="text" name="rec_tratamiento" id="rec_tratamiento"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->tratamiento_rec : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -175,7 +175,7 @@
                                     <input type="text" name="nom_tratamiento" id="nom_tratamiento"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->tratamiento_med : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -184,7 +184,7 @@
                                     Suministra</label>
                                 <div class="mt-2.5">
                                     <select id="sum_tratamiento" name="sum_tratamiento"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->tratamiento_sum == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -213,7 +213,7 @@
                                     Dia</label>
                                 <div class="mt-2.5">
                                     <select id="dosi_tratamiento" name="dosi_tratamiento"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->tratamiento_dosis == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -243,7 +243,7 @@
                                 <ul class="grid w-full md:grid-cols-2">
                                     <li>
                                         <input type="radio" id="enfermedadsi" name="enfermedad"
-                                            value="enfermedadsi" class="hidden peer" />
+                                            value="si" class="progress-field hidden peer" {{ isset($healthSheet->enfermedad) && $healthSheet->enfermedad == 'si' ? 'checked' : '' }}/>
                                         <label for="enfermedadsi"
                                             class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
                                              border-gray-200 rounded-lg rounded-r-none cursor-pointer dark:hover:text-gray-300
@@ -257,7 +257,7 @@
                                     </li>
                                     <li>
                                         <input type="radio" id="enfermedadno" name="enfermedad"
-                                            value="enfermedadno" class="hidden peer" checked>
+                                            value="no" class="hidden peer" {{ isset($healthSheet->enfermedad) && $healthSheet->enfermedad == 'no' ? 'checked' : '' }} />
                                         <label for="enfermedadno"
                                             class="inline-flex justify-center w-full p-1.5
                                              text-gray-500 bg-white border border-gray-200
@@ -283,7 +283,7 @@
                                     <input type="text" name="obs_enfermedad" id="obs_enfermedad"
                                         autocomplete="given-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->enfermedad_obs : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -294,7 +294,7 @@
                                     <input type="text" name="rec_enfermedad" id="rec_enfermedad"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->enfermedad_rec : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -305,7 +305,7 @@
                                     <input type="text" name="nom_enfermedad" id="nom_enfermedad"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->enfermedad_med : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -314,7 +314,7 @@
                                     lo Suministra</label>
                                 <div class="mt-2.5">
                                     <select id="sum_enfermedad" name="sum_enfermedad"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->enfermedad_sum == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -342,7 +342,7 @@
                                     al Dia</label>
                                 <div class="mt-2.5">
                                     <select id="dosi_enfermedad" name="dosi_enfermedad"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->enfermedad_dosis == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -372,7 +372,7 @@
                                 <ul class="grid w-full md:grid-cols-2">
                                     <li>
                                         <input type="radio" id="medicamentosi" name="medicamento"
-                                            value="medicamentosi" class="hidden peer" />
+                                            value="si" class="progress-field hidden peer" {{ isset($healthSheet->alergia) && $healthSheet->alergia == 'si' ? 'checked' : '' }}/>
                                         <label for="medicamentosi"
                                             class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
                                              border-gray-200 rounded-lg rounded-r-none cursor-pointer dark:hover:text-gray-300
@@ -386,7 +386,7 @@
                                     </li>
                                     <li>
                                         <input type="radio" id="medicamentono" name="medicamento"
-                                            value="medicamentono" class="hidden peer" checked>
+                                            value="no" class="hidden peer" {{ isset($healthSheet->alergia) && $healthSheet->alergia == 'no' ? 'checked' : '' }}/>
                                         <label for="medicamentono"
                                             class="inline-flex justify-center w-full p-1.5
                                              text-gray-500 bg-white border border-gray-200
@@ -412,7 +412,7 @@
                                     <input type="text" name="obs_alergico" id="obs_alergico"
                                         autocomplete="given-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->alergia_obs : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -423,7 +423,7 @@
                                     <input type="text" name="rec_alergico" id="rec_alergico"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->alergia_rec : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -434,7 +434,7 @@
                                     <input type="text" name="nom_alergico" id="nom_alergico"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->alergia_med : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -443,7 +443,7 @@
                                     lo Suministra</label>
                                 <div class="mt-2.5">
                                     <select id="sum_alergico" name="sum_alergico"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->alergia_sum == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -471,7 +471,7 @@
                                     al Dia</label>
                                 <div class="mt-2.5">
                                     <select id="dosi_alergico" name="dosi_alergico"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-fieldblock w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->alergia_dosis == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -500,8 +500,8 @@
                             <div class="w-full flex ">
                                 <ul class="grid w-full md:grid-cols-2">
                                     <li>
-                                        <input type="radio" id="alergiasi" name="alergia" value="alergiasi"
-                                            class="hidden peer" />
+                                        <input type="radio" id="alergiasi" name="alergia" value="si"
+                                            class="progress-field hidden peer" {{ isset($healthSheet->alergia_ad) && $healthSheet->alergia_ad == 'si' ? 'checked' : '' }}/>
                                         <label for="alergiasi"
                                             class="inline-flex justify-center w-full p-1.5 text-gray-500 bg-white border
                                              border-gray-200 rounded-lg rounded-r-none cursor-pointer dark:hover:text-gray-300
@@ -514,8 +514,8 @@
                                         </label>
                                     </li>
                                     <li>
-                                        <input type="radio" id="alergiano" name="alergia" value="alergiano"
-                                            class="hidden peer" checked>
+                                        <input type="radio" id="alergiano" name="alergia" value="no"
+                                            class="hidden peer" {{ isset($healthSheet->alergia_ad) && $healthSheet->alergia_ad == 'no' ? 'checked' : '' }}/>
                                         <label for="alergiano"
                                             class="inline-flex justify-center w-full p-1.5
                                              text-gray-500 bg-white border border-gray-200
@@ -541,7 +541,7 @@
                                     <input type="text" name="obs_alerg_ad" id="obs_alerg_ad"
                                         autocomplete="given-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->alergia_ad_obs : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -552,7 +552,7 @@
                                     <input type="text" name="rec_alerg_ad" id="rec_alerg_ad"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->alergia_ad_rec : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -563,7 +563,7 @@
                                     <input type="text" name="nom_alerg_ad" id="nom_alerg_ad"
                                         autocomplete="family-name"
                                         value="{{ isset($healthSheet) ? $healthSheet->alergia_ad_med : '' }}"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                             <div class="max-sm:col-span-3">
@@ -572,7 +572,7 @@
                                     lo Suministra</label>
                                 <div class="mt-2.5">
                                     <select id="sum_alerg_ad" name="sum_alerg_ad"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->alergia_ad_sum == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -600,7 +600,7 @@
                                     al Dia</label>
                                 <div class="mt-2.5">
                                     <select id="dosi_alerg_ad" name="dosi_alerg_ad"
-                                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         <option value="seleccionar opcion"
                                             {{ isset($healthSheet) && $healthSheet->alergia_ad_dosis == 'seleccionar opcion' ? 'selected' : '' }}>
                                             Seleccionar opción</option>
@@ -734,7 +734,7 @@
                                 class="block text-sm font-semibold leading-6 text-gray-900">Vacunas Covid</label>
                             <div class="mt-2.5">
                                 <select id="vacunas_covid" name="vacunas_covid"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                     <option value="seleccionar opcion"
                                         {{ isset($healthSheet) && $healthSheet->vacunas_covid == 'seleccionar opcion' ? 'selected' : '' }}>
                                         Seleccionar opción</option>
@@ -763,7 +763,7 @@
                             <div class="mt-2.5">
                                 <input type="text" name="efec_secund" id="efec_secund" autocomplete="family-name"
                                     value="{{ isset($healthSheet) ? $healthSheet->efecto_secundarios : '' }}"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                     </div>
@@ -820,9 +820,14 @@
                                 Historial Médico (opcional)
                             </label>
                             <div class="mt-2.5">
-                                <input type="text" name="hist_medic" id="hist_medic" autocomplete="given-name"
-                                    value="{{ isset($healthSheet) ? $healthSheet->hist_medico : '' }}"
+                                <input type="file" name="hist_medic" id="hist_medic" accept=".pdf"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    @if(isset($healthSheet) && $healthSheet->hist_medico)
+                                        <p class="mt-2 text-sm text-gray-600">
+                                            Archivo existente:
+                                            <a href="{{ asset('storage/' . $healthSheet->hist_medico) }}" target="_blank" class="text-blue-600 underline">Ver PDF</a>
+                                        </p>
+                                    @endif
                             </div>
                         </div>
                         <div>
@@ -830,10 +835,14 @@
                                 class="block text-sm font-semibold leading-6 text-gray-900">Historial
                                 de Salud Emocional (opcional)</label>
                             <div class="mt-2.5">
-                                <input type="text" name="hist_salud_em" id="hist_salud_em"
-                                    autocomplete="family-name"
-                                    value="{{ isset($healthSheet) ? $healthSheet->hist_med_em : '' }}"
+                                <input type="file" name="hist_salud_em" id="hist_salud_em"  accept=".pdf"
                                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    @if(isset($healthSheet) && $healthSheet->hist_med_em)
+                                        <p class="mt-2 text-sm text-gray-600">
+                                            Archivo existente:
+                                            <a href="{{ asset('storage/' . $healthSheet->hist_med_em) }}" target="_blank" class="text-blue-600 underline">Ver PDF</a>
+                                        </p>
+                                    @endif
                             </div>
                         </div>
                     </div>
@@ -862,7 +871,7 @@
                         <span id="success-text"></span>
                     </div>
                     <div>
-                        <button type="submit"
+                        <button type="submit" id="guardar-cambios-btn"
                             class="block w-full rounded-full bg-red-rv px-16 py-5
                                 text-center text-sm font-semibold text-white shadow-sm
                                 hover:bg-red-rv">
@@ -999,5 +1008,58 @@
         alergiasi.addEventListener('change', togglePreguntas4);
         alergiano.addEventListener('change', togglePreguntas4);
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fields = document.querySelectorAll('.progress-field');
+        let progress = 0;
 
+        function updateProgressBar() {
+            const enabledFields = Array.from(fields).filter(field => !field.disabled && !field.readOnly);
+            const filledFields = enabledFields.filter(field => field.value.trim() !== '');
+            progress = Math.round((filledFields.length / enabledFields.length) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progress + '%';
+            progressBar.setAttribute('aria-valuenow', progress);
+            progressBar.textContent = progress + '% completado';
+        }
+
+        function enviarCorreoF() {
+            fetch('/enviar-correo-ficham', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    mensaje: 'Tus datos fueron completados al 100%'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Correo enviado con éxito!');
+                } else {
+                    alert('Hubo un error al enviar el correo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        const guardarCambiosBtn = document.getElementById('guardar-cambios-btn');
+        guardarCambiosBtn.addEventListener('click', function(event) {
+            if (progress === 100) {
+                enviarCorreoF();
+            }
+        });
+
+        updateProgressBar();
+
+        fields.forEach(field => {
+            field.addEventListener('input', updateProgressBar);
+            field.addEventListener('change', updateProgressBar);
+        });
+    });
+</script>
 </x-approxana-layout>

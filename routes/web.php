@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CreatePackagesController;
 use App\Http\Controllers\CreateTravelsController;
 use App\Http\Controllers\CreatePassengerController;
@@ -8,12 +9,16 @@ use App\Http\Controllers\CreatePaymentsController;
 use App\Http\Controllers\health_sheetController;
 use App\Http\Controllers\Sheet_NutritionalController;
 use App\Http\Controllers\ProfileController;
+use App\Mail\CamposCompletadosMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckinController;
 use App\Http\Controllers\DashboardController;
+use GuzzleHttp\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +29,12 @@ use App\Http\Controllers\DashboardController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/*RUTAS ADMINISTRADOR*/
+Route::middleware('auth')->group(function () {
+route::resource('user', AdminUserController::class)->only('index', 'edit', 'update')->names('admin.users');
+});
+
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -49,13 +60,15 @@ Route::get('/mi-viaje/{groupId}/permisonotarial', [DashboardController::class, '
 Route::get('/mi-viaje/{groupId}/voucher', [DashboardController::class, 'downloadVoucher'])->name('download-voucher');
 Route::get('/mi-viaje/{groupId}/listaclinicas', [DashboardController::class, 'downloadListaClinicas'])->name('download-listaclinicas');
 
-
+Route::post('/enviar-correo', [UserController::class, 'enviarCorreo'])->name('enviar.correo');
+Route::post('/enviar-correo-ficham', [health_sheetController::class, 'enviarCorreoF']);
+Route::post('/enviar-correo-fichan', [Sheet_NutritionalController::class, 'enviarCorreoN']);
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->Middleware('can:padres')->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->Middleware('can:padres')->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->Middleware('can:padres')->name('profile.destroy');
 });
 
 Route::get('/usuarios', [UserController::class, 'show'])->name('users.mis-datos');
@@ -79,9 +92,17 @@ Route::post('/mi-checkin', [CheckinController::class, 'store'])->name('mi-checki
 
 
 
-Route::get('/mi-itinerario', function () {
-    return view('users.mi-itinerario');
-})->middleware(['auth', 'verified'])->name('mi-itinerario');
+Route::get('/mi-pagos', function () {
+    return view('users.mis-pagos');
+})->middleware(['auth', 'verified'])->name('mi-pagos');
+
+Route::get('/mi-cronograma', function () {
+    return view('users.mi-cronograma');
+})->middleware(['auth', 'verified'])->name('users.mi-cronograma');
+
+Route::get('/mi-estado', function () {
+    return view('users.mi-estado');
+})->middleware(['auth', 'verified'])->name('users.mi-estado');
 
 Route::get('/mi-fotoyvideo', function () {
     return view('users.mi-fotoyvideo');
@@ -91,9 +112,6 @@ Route::get('/mi-documento', function () {
     return view('users.mi-documento');
 })->middleware(['auth', 'verified'])->name('mi-documento');
 
-Route::get('/mi-cronograma', function () {
-    return view('users.mi-cronograma');
-})->middleware(['auth', 'verified'])->name('mi-cronograma');
 Route::get('/principal', function () {
     return view('users.principal');
 })->middleware(['auth', 'verified'])->name('principal');

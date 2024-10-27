@@ -44,7 +44,10 @@ class CheckinController extends Controller
         'pesomaleta' => 'required|numeric',
         'fotomaleta' => 'required|array', // Cambiado a 'array' para múltiples archivos
         'fotomaleta.*' => 'image|mimes:jpeg,png,jpg', // Validación individual para archivos
-        'lugarmaleta' => 'required|string',
+	'fotomaleta1' => 'nullable|array', // Validación para la imagen frontal
+        'fotomaleta1.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+        'fotomaleta2' => 'nullable|array', // Cambiado a array
+        'fotomaleta2.*' => 'image|mimes:jpeg,png,jpg|max:2048',
     ]);
     // Crear un nuevo registro de Checkin
     $checkin = new Checkin();
@@ -61,12 +64,33 @@ class CheckinController extends Controller
         $checkin->images = json_encode($imageNames); // Guardar los nombres de las imágenes en formato JSON
     }
 
+    // Guardar las imágenes de 'fotomaleta1'
+    if ($request->hasFile('fotomaleta1')) {
+        $imageNames1 = [];
+        foreach ($request->file('fotomaleta1') as $file) {
+            $imageName1 = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('images/checkins'), $imageName1);
+            $imageNames1[] = $imageName1;
+        }
+        $checkin->images1 = json_encode($imageNames1); // Guardar las imágenes de 'fotomaleta1'
+    }
+
+    // Guardar las imágenes de 'fotomaleta2'
+    if ($request->hasFile('fotomaleta2')) {
+        $imageNames2 = [];
+        foreach ($request->file('fotomaleta2') as $file) {
+            $imageName2 = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('images/checkins'), $imageName2);
+            $imageNames2[] = $imageName2;
+        }
+        $checkin->images2 = json_encode($imageNames2); // Guardar las imágenes de 'fotomaleta2'
+    }
+
     // Guardar los demás campos
     $checkin->tip_maleta = $request->maletatype;
     $checkin->color = $request->colormaleta;
     $checkin->caracteristicas = $request->caracteristicamaleta;
     $checkin->peso = $request->pesomaleta;
-    $checkin->lugar_regis = $request->lugarmaleta;
 
     // Guardar el registro
     $checkin->save();
@@ -76,7 +100,6 @@ class CheckinController extends Controller
         'maletatype' => $request->maletatype,
         'colormaleta' => $request->colormaleta,
         'pesomaleta' => $request->pesomaleta,
-        'lugarmaleta' => $request->lugarmaleta,
     ];
 
     Mail::to(Auth::user()->email)->send(new LuggageSavedMail(Auth::user(), $luggageDetails));
@@ -101,9 +124,8 @@ class CheckinController extends Controller
                                 ->toArray(); 
         // Todas las opciones posibles de maleta
         $allTypes = [
-            'Bolso de mano o mochila',
-            'Equipaje de mano (carry on)',
-            '-'
+            'Maleta de 8kg',
+            'Maleta de 23kg'
         ];
        
             //dd($checkin);

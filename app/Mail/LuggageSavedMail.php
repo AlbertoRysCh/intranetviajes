@@ -7,6 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use PDF;
+
+/*use Barryvdh\DomPDF\Facade as PDF;*/
 use Illuminate\Queue\SerializesModels;
 
 class LuggageSavedMail extends Mailable
@@ -51,8 +54,17 @@ class LuggageSavedMail extends Mailable
     }*/
     public function build()
     {
+         // Generar el PDF con la vista 'pdf.luggage_pdf'
+         $pdf = PDF::loadView('pdf.luggage_pdf', [
+            'user' => $this->user,
+            'luggageDetails' => $this->luggageDetails,
+        ]);
+
         return $this->subject('Confirmación de Equipaje Guardado')
-                    ->view('emails.luggage_saved');
+                    ->view('emails.luggage_saved')
+                    ->attachData($pdf->output(), 'equipaje.pdf', [
+                        'mime' => 'application/pdf',
+                    ]);
     }
     /**
      * Get the attachments for the message.

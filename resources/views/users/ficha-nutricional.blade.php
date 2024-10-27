@@ -30,8 +30,8 @@
         <div class="max-w-7xl mx-auto mt-10 sm:px-6 lg:px-8 max-sm:px-4">
             <div class="flex flex-row text-center gap-6 mb-8 items-center max-sm:flex-col">
                 <h3 class=" font-normal text-5xl">Ficha Nutricional</h3>
-                <div class="w-80 bg-gray-300 rounded-md ">
-                    <p class="text-center bg-green-400 border border-green-400 rounded-md w-72 ">95% completado</p>
+                <div class="progress w-80 bg-gray-300 rounded-md">
+                    <p class="progress-bar text-center bg-green-400 border border-green-400 rounded-md w-72" role="progressbar" id="progress-bar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0% completado</p>
                 </div>
             </div>
             <div class="flex flex-row items-center">
@@ -64,7 +64,7 @@
                             <div class="mt-2.5">
                                 <input type="text" name="peso" id="peso" autocomplete="family-name"
                                     value="{{ isset($nutritionalSheet) ? $nutritionalSheet->peso : '' }}"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div class=" max-sm:col-span-3">
@@ -73,7 +73,7 @@
                             <div class="mt-2.5">
                                 <input type="text" name="talla" id="talla" autocomplete="family-name"
                                     value="{{ isset($nutritionalSheet) ? $nutritionalSheet->talla : '' }}"
-                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                    class="progress-field block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                         <div class=" max-sm:col-span-3">
@@ -409,7 +409,7 @@
                         <span id="success-text"></span>
                     </div>
                     <div>
-                        <button type="submit"
+                        <button type="submit" id="guardar-cambios-btn"
                             class="block w-full rounded-full bg-red-rv px-16 py-5
                                 text-center text-sm font-semibold text-white shadow-sm
                                 hover:bg-red-rv">
@@ -487,5 +487,58 @@
             siguesDieta.addEventListener('change', toggleInput6);
         });
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fields = document.querySelectorAll('.progress-field');
+        let progress = 0;
 
+        function updateProgressBar() {
+            const enabledFields = Array.from(fields).filter(field => !field.disabled && !field.readOnly);
+            const filledFields = enabledFields.filter(field => field.value.trim() !== '');
+            progress = Math.round((filledFields.length / enabledFields.length) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = progress + '%';
+            progressBar.setAttribute('aria-valuenow', progress);
+            progressBar.textContent = progress + '% completado';
+        }
+
+        function enviarCorreoN() {
+            fetch('/enviar-correo-fichan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    mensaje: 'Tus datos fueron completados al 100%'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Correo enviado con éxito!');
+                } else {
+                    alert('Hubo un error al enviar el correo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        const guardarCambiosBtn = document.getElementById('guardar-cambios-btn');
+        guardarCambiosBtn.addEventListener('click', function(event) {
+            if (progress === 100) {
+                enviarCorreoN();
+            }
+        });
+
+        updateProgressBar();
+
+        fields.forEach(field => {
+            field.addEventListener('input', updateProgressBar);
+            field.addEventListener('change', updateProgressBar);
+        });
+    });
+</script>
 </x-approxana-layout>

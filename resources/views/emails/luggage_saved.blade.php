@@ -11,7 +11,6 @@
         <li>Tipo de maleta: {{ $luggageDetails['maletatype'] }}</li>
         <li>Color: {{ $luggageDetails['colormaleta'] }}</li>
         <li>Peso: {{ $luggageDetails['pesomaleta'] }} Kg</li>
-        <li>Lugar de registro: {{ $luggageDetails['lugarmaleta'] }}</li>
     </ul>
 </body>
 </html>
