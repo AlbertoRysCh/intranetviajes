@@ -1,7 +1,7 @@
 <x-approxana-layout>
     <div class="mt-6 text-center sm:text-left">
         <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 max-sm:pl-8">
-            <a href="{{ route('mi-pagos') }}"
+            <a href="{{ route('mis-pagos') }}"
                 class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">

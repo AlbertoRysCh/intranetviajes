@@ -1,7 +1,7 @@
 <x-approxana-layout>
     <div class="mt-6 text-center sm:text-left">
         <div class="max-w-7xl mx-auto my-4 sm:px-6 lg:px-8 max-sm:pl-8">
-            <a href="{{ route('mi-pagos') }}"
+            <a href="{{ route('mis-pagos') }}"
                 class="flex flex-row items-center gap-4 border-2 border-gray-400 rounded-full w-48 py-2 justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
@@ -15,14 +15,17 @@
     <div class="mt-6 text-center sm:text-left">
         <div class="max-w-6xl mx-auto my-10">
             <div class="flex flex-col max-sm:px-3">
-                <p class="text-5xl">Viaje a <span class="font-bold">Cancún</span></p>
+                <p class="text-5xl">Viaje a <span class="font-bold">{{ $travel->nombre_viaje }}</span></p>
             </div>
             <div class="flex flex-row pt-4 gap-6">
-                <p>Fecha <span>23 de Setiembre</span> </p>
-                <p>Codigo de programa: <span>VPPE01</span> </p>
+                <p>Fecha: <span>{{ \Carbon\Carbon::parse($travel->fecha_viaje)->format('d \d\e F') }}</span></p>
+                <p>Código de programa: <span>{{ $travel->codigo_viaje }}</span></p>
+                <p>Pago Total de Viaje: S/ <span class="font-bold">{{ number_format($travel->costo_total, 2) }}</span></p>
             </div>
         </div>
     </div>
+    
+    
 
     <div class="pb-6">
         <div class="max-w-6xl mx-auto">

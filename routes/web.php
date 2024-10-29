@@ -91,18 +91,14 @@ Route::post('/mi-checkin', [CheckinController::class, 'store'])->name('mi-checki
 });
 
 
+Route::get('/mis-pagos', [CreatePaymentsController::class, 'index'])->name('mis-pagos');
+Route::get('/mi-estado/{groupId}', [CreatePaymentsController::class, 'showTravelStatus'])->name('users.mi-estado');
 
-Route::get('/mi-pagos', function () {
-    return view('users.mis-pagos');
-})->middleware(['auth', 'verified'])->name('mi-pagos');
+
 
 Route::get('/mi-cronograma', function () {
     return view('users.mi-cronograma');
 })->middleware(['auth', 'verified'])->name('users.mi-cronograma');
-
-Route::get('/mi-estado', function () {
-    return view('users.mi-estado');
-})->middleware(['auth', 'verified'])->name('users.mi-estado');
 
 Route::get('/mi-fotoyvideo', function () {
     return view('users.mi-fotoyvideo');

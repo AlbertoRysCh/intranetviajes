@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CreatePayments;
+use Illuminate\Support\Facades\Auth;
+use App\Models\CreateGroups;
+use App\Models\Travel;
 use Illuminate\Http\Request;
 
 class CreatePaymentsController extends Controller
@@ -14,8 +17,26 @@ class CreatePaymentsController extends Controller
      */
     public function index()
     {
-        return view('admin.create.payments');
+        $user = Auth::user();
+        // Obtener todos los grupos a los que pertenece el usuario con sus respectivos viajes
+        $groups = $user->groups()->with('travel')->get();
+
+        return view('users.mis-pagos', compact('groups'));
     }
+
+    public function showTravelStatus($groupId)
+{
+    // Obtener el grupo con el viaje relacionado usando el ID del grupo
+    $group = CreateGroups::with('travel')->find($groupId);
+
+    if ($group && $group->travel) {
+        $travel = $group->travel;
+        return view('users.mi-estado', compact('travel', 'group'));
+    } else {
+        return redirect()->route('dashboard')->with('error', 'Viaje no encontrado.');
+    }
+}
+
 
     /**
      * Show the form for creating a new resource.
